@@ -1,0 +1,113 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+@import url("https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dopo-purple: #6A52F1;
+  --dopo-purple-light: #8B78F4;
+  --dopo-purple-dark: #5240C9;
+  --background: #1D212C;
+  --background-dark: #111827;
+  --background-card: #252A3A;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Pretendard Variable", Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  background-color: var(--background);
+  color: #E5E7EB;
+  line-height: 1.6;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    line-height: 1.4;
+  }
+
+  h2 {
+    line-height: 1.5;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-dopo-purple hover:bg-dopo-purple-dark text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-dopo-purple/30 hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-secondary {
+    @apply bg-background-card hover:bg-dopo-purple/20 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 border border-dopo-purple/30;
+  }
+
+  .section-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .glass-card {
+    @apply bg-background-card/80 backdrop-blur-md rounded-2xl shadow-lg border border-white/5;
+  }
+
+  .headline {
+    @apply leading-relaxed-headline tracking-tight;
+  }
+
+  .headline-loose {
+    @apply leading-loose-headline tracking-tight;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1D212C;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dopo-purple-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dopo-purple);
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--dopo-purple);
+  color: white;
+}
+
+/* Glow effect for important elements */
+.glow {
+  box-shadow: 0 0 30px rgba(106, 82, 241, 0.4);
+}
+
+.glow-sm {
+  box-shadow: 0 0 15px rgba(106, 82, 241, 0.3);
+}
