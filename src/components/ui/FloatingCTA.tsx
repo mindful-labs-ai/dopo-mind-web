@@ -21,7 +21,7 @@ export default function FloatingCTA({ onClick }: FloatingCTAProps) {
     >
       <motion.button
         onClick={onClick}
-        className="flex items-center gap-2 bg-dopo-purple hover:bg-dopo-purple-dark text-white px-6 py-4 rounded-full shadow-lg hover:shadow-xl transition-all font-medium glow-sm"
+        className="flex items-center gap-2 bg-sage hover:bg-sage-dark text-white px-6 py-4 rounded-full shadow-lg hover:shadow-xl transition-all font-medium glow-sm"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >

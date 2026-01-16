@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Instagram, Mail } from "lucide-react";
-import Image from "next/image";
+import { Mail, MapPin } from "lucide-react";
 
 interface FooterProps {
   onOpenModal: () => void;
@@ -12,36 +11,29 @@ export default function Footer({ onOpenModal }: FooterProps) {
   return (
     <footer className="bg-background-dark">
       {/* CTA Banner */}
-      <div className="bg-gradient-to-r from-dopo-purple to-dopo-purple-dark py-16 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-sage to-sage-dark py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
         <div className="section-container text-center relative z-10">
-          <motion.div
+          <motion.p
+            className="text-2xl sm:text-3xl font-bold mb-4 text-white leading-[1.5]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-6"
           >
-            <div className="inline-block bg-black/15 rounded-2xl">
-              <Image
-                src="/dopo-heart-cta.png"
-                alt="도포 하트"
-                width={144}
-                height={144}
-              />
-            </div>
-          </motion.div>
+            혼자 끙끙 앓지 마세요.
+          </motion.p>
           <motion.p
-            className="text-2xl sm:text-3xl font-bold mb-6 text-white leading-[1.5]"
+            className="text-lg text-white/80 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            더 늦기 전에, 내 마음을 안아주세요.
+            첫 상담은 무료입니다.
           </motion.p>
           <motion.button
             onClick={onOpenModal}
-            className="bg-white hover:bg-gray-100 text-dopo-purple font-semibold py-4 px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl text-lg"
+            className="bg-white hover:bg-gray-100 text-sage-dark font-semibold py-4 px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl text-lg"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             initial={{ opacity: 0, y: 20 }}
@@ -49,7 +41,7 @@ export default function Footer({ onOpenModal }: FooterProps) {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            지금 바로 신청하기
+            상담 신청하기
           </motion.button>
         </div>
       </div>
@@ -60,36 +52,31 @@ export default function Footer({ onOpenModal }: FooterProps) {
           {/* Logo & Info */}
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
-              <span className="text-xl font-bold text-white">도포의 마음 상담</span>
+              <span className="text-xl font-bold text-text">마음토스 상담센터</span>
             </div>
-            <p className="text-gray-500 text-sm mb-4">
-              마음이 지친 당신을 위한 따뜻한 상담 서비스
+            <p className="text-text-subtle text-sm mb-4">
+              합리적인 비용으로 만나는 전문 심리상담
             </p>
 
-            {/* Social Links */}
-            <div className="flex items-center justify-center md:justify-start gap-3">
+            {/* Contact */}
+            <div className="flex flex-col gap-2 text-sm text-text-muted">
               <a
-                href="https://www.instagram.com/d0po.mind/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-background-card hover:bg-dopo-purple rounded-full flex items-center justify-center transition-colors border border-white/5"
-                aria-label="Instagram"
+                href="mailto:contact@maumtoss.com"
+                className="flex items-center justify-center md:justify-start gap-2 hover:text-sage transition-colors"
               >
-                <Instagram className="w-4 h-4 text-gray-400 hover:text-white" />
+                <Mail className="w-4 h-4" />
+                <span>contact@mindthos.com</span>
               </a>
-              <a
-                href="mailto:honam.kang@mindfullabs.ai"
-                className="w-9 h-9 bg-background-card hover:bg-dopo-purple rounded-full flex items-center justify-center transition-colors border border-white/5"
-                aria-label="Email"
-              >
-                <Mail className="w-4 h-4 text-gray-400 hover:text-white" />
-              </a>
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <MapPin className="w-4 h-4" />
+                <span>홍대입구역 도보 5분</span>
+              </div>
             </div>
           </div>
 
           {/* Company Info */}
-          <div className="text-center md:text-right text-sm text-gray-500 leading-relaxed">
-            <p className="font-medium text-gray-400 mb-2">마인드풀랩스 주식회사 (Mindful Labs Inc.)</p>
+          <div className="text-center md:text-right text-sm text-text-subtle leading-relaxed">
+            <p className="font-medium text-text-muted mb-2">마인드풀랩스 주식회사 (Mindful Labs Inc.)</p>
             <p>대표: 강호남</p>
             <p>서울특별시 성동구 뚝섬로13길 38, 4층 (성수동)</p>
             <p className="mt-2">
@@ -103,16 +90,16 @@ export default function Footer({ onOpenModal }: FooterProps) {
         <div className="border-t border-white/5 my-8" />
 
         {/* Bottom links */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-text-subtle">
           <div className="flex gap-6">
-            <a href="#" className="hover:text-dopo-purple transition-colors">
+            <a href="#" className="hover:text-sage transition-colors">
               이용약관
             </a>
-            <a href="#" className="hover:text-dopo-purple transition-colors">
+            <a href="#" className="hover:text-sage transition-colors">
               개인정보처리방침
             </a>
           </div>
-          <p className="text-gray-600">
+          <p className="text-text-subtle">
             Copyright © Mindful Labs Inc. | All Rights Reserved
           </p>
         </div>

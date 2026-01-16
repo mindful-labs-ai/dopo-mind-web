@@ -6,12 +6,17 @@
 @tailwind utilities;
 
 :root {
-  --dopo-purple: #6A52F1;
-  --dopo-purple-light: #8B78F4;
-  --dopo-purple-dark: #5240C9;
-  --background: #1D212C;
-  --background-dark: #111827;
-  --background-card: #252A3A;
+  /* MaumToss - Deep Forest & Calm Night */
+  --sage: #6A9C78;
+  --sage-light: #C4D7B2;
+  --sage-dark: #5A8A68;
+  --background: #1A1A1A;
+  --background-dark: #121212;
+  --background-card: #2C2C2C;
+  --background-elevated: #363636;
+  --text: #E0E0E0;
+  --text-muted: #A0A0A0;
+  --text-subtle: #707070;
 }
 
 * {
@@ -30,7 +35,7 @@ body {
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
   background-color: var(--background);
-  color: #E5E7EB;
+  color: var(--text);
   line-height: 1.6;
 }
 
@@ -55,11 +60,11 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply bg-dopo-purple hover:bg-dopo-purple-dark text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-dopo-purple/30 hover:-translate-y-0.5 active:translate-y-0;
+    @apply bg-sage hover:bg-sage-dark text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-sage/30 hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-secondary {
-    @apply bg-background-card hover:bg-dopo-purple/20 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 border border-dopo-purple/30;
+    @apply bg-background-card hover:bg-sage/20 text-text font-semibold py-3 px-6 rounded-full transition-all duration-300 border border-sage/30;
   }
 
   .section-container {
@@ -68,6 +73,10 @@ body {
 
   .glass-card {
     @apply bg-background-card/80 backdrop-blur-md rounded-2xl shadow-lg border border-white/5;
+  }
+
+  .card {
+    @apply bg-background-card rounded-2xl border border-white/5;
   }
 
   .headline {
@@ -85,29 +94,46 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1D212C;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--dopo-purple-dark);
+  background: var(--sage-dark);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--dopo-purple);
+  background: var(--sage);
 }
 
 /* Selection color */
 ::selection {
-  background-color: var(--dopo-purple);
+  background-color: var(--sage);
   color: white;
 }
 
 /* Glow effect for important elements */
 .glow {
-  box-shadow: 0 0 30px rgba(106, 82, 241, 0.4);
+  box-shadow: 0 0 30px rgba(106, 156, 120, 0.4);
 }
 
 .glow-sm {
-  box-shadow: 0 0 15px rgba(106, 82, 241, 0.3);
+  box-shadow: 0 0 15px rgba(106, 156, 120, 0.3);
+}
+
+/* Ambient light effect */
+.ambient-light {
+  position: relative;
+}
+
+.ambient-light::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(106, 156, 120, 0.1) 0%, transparent 70%);
+  pointer-events: none;
 }

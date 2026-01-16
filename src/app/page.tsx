@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import Header from "@/components/sections/Header";
 import HeroSection from "@/components/sections/HeroSection";
-import PainPointSection from "@/components/sections/PainPointSection";
-import HurdleSection from "@/components/sections/HurdleSection";
+import WhyMaumTossSection from "@/components/sections/WhyMaumTossSection";
+import ServiceDetailSection from "@/components/sections/ServiceDetailSection";
+import ProcessSection from "@/components/sections/ProcessSection";
 import PricingSection from "@/components/sections/PricingSection";
-import DepositSection from "@/components/sections/DepositSection";
-import AIChatSection from "@/components/sections/AIChatSection";
+import PartnersSection from "@/components/sections/PartnersSection";
+import PolicySection from "@/components/sections/PolicySection";
 import FAQSection from "@/components/sections/FAQSection";
 import Footer from "@/components/sections/Footer";
 import ConsultationModal from "@/components/forms/ConsultationModal";
@@ -20,12 +22,14 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
+      <Header onOpenModal={openModal} />
       <HeroSection onOpenModal={openModal} />
-      <PainPointSection />
-      <HurdleSection />
-      <PricingSection />
-      <DepositSection />
-      <AIChatSection />
+      <WhyMaumTossSection />
+      <ServiceDetailSection />
+      <ProcessSection />
+      <PricingSection onOpenModal={openModal} />
+      <PartnersSection />
+      <PolicySection />
       <FAQSection />
       <Footer onOpenModal={openModal} />
 

@@ -1,9 +1,9 @@
 export const CONCERN_OPTIONS = [
-  { value: "depression", label: "자꾸만 우울하고 무기력해요" },
-  { value: "anxiety", label: "불안하고 초조해서 잠이 안 와요" },
-  { value: "relationship", label: "가족/연인/친구 관계가 너무 힘들어요" },
-  { value: "career", label: "회사/진로 때문에 스트레스 받아요" },
-  { value: "self-esteem", label: "자존감이 낮아진 것 같아요" },
+  { value: "career", label: "진로/직장 (취업, 이직, 직장 내 스트레스)" },
+  { value: "relationship", label: "대인관계 (가족, 연인, 친구와의 갈등)" },
+  { value: "depression", label: "우울/불안 (우울감, 불안, 무기력)" },
+  { value: "self-understanding", label: "자기이해 (자존감, 정체성)" },
+  { value: "other", label: "기타 (일상에서 설명하기 어려운 심리적 불편감)" },
 ];
 
 export const DAY_OPTIONS = [
@@ -13,17 +13,17 @@ export const DAY_OPTIONS = [
   { value: "thu", label: "목" },
   { value: "fri", label: "금" },
   { value: "sat", label: "토" },
-  { value: "sun", label: "일" },
 ];
 
 export const TIME_OPTIONS = [
-  { value: "morning", label: "오전 (9-12시)" },
-  { value: "afternoon", label: "오후 (12-18시)" },
-  { value: "evening", label: "저녁 (18-21시)" },
+  { value: "morning", label: "오전 (10시~12시)" },
+  { value: "afternoon-early", label: "오후 초반 (12시~15시)" },
+  { value: "afternoon-late", label: "오후 후반 (15시~17시)" },
+  { value: "evening", label: "저녁 (17시~21시)" },
 ];
 
-export const CONSULTATION_TYPE_OPTIONS = [
-  { value: "face-to-face", label: "대면 상담", icon: "Users" },
-  { value: "video", label: "화상 상담", icon: "Video" },
-  { value: "phone", label: "전화 상담", icon: "Phone" },
+export const GENDER_OPTIONS = [
+  { value: "male", label: "남성" },
+  { value: "female", label: "여성" },
+  { value: "other", label: "기타" },
 ];
