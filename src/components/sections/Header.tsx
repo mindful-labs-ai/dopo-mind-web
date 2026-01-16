@@ -56,7 +56,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
-              마음토스
+              마음토스 상담센터
             </a>
 
             {/* Desktop Navigation */}
