@@ -3,19 +3,20 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
-const painPoints = [
+const contentItems = [
   {
-    emoji: "😔",
-    text: "겉으로는 웃는데 속은 텅 빈 것 같아.",
+    image: "/dopo-content-01.png",
+    link: "https://www.instagram.com/reel/DQJQ80uEuqx/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
-    emoji: "😩",
-    text: "퇴근하고 집에 오면 손가락 하나 까딱하기 싫어.",
+    image: "/dopo-content-02.png",
+    link: "https://www.instagram.com/reel/DReiayiDw6Z/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
   {
-    emoji: "😞",
-    text: "남들은 다 잘 사는데 나만 뒤처지는 기분이야.",
+    image: "/dopo-content-03.png",
+    link: "https://www.instagram.com/reel/DQd3cT5klCv/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
   },
 ];
 
@@ -47,22 +48,28 @@ export default function PainPointSection() {
           </h2>
         </motion.div>
 
-        {/* Pain point cards */}
+        {/* Content cards */}
         <div className="grid md:grid-cols-3 gap-6 mb-16 items-center">
-          {painPoints.map((point, index) => (
-            <motion.div
+          {contentItems.map((item, index) => (
+            <motion.a
               key={index}
-              className="glass-card p-8 text-center"
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-2xl overflow-hidden cursor-pointer"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 + index * 0.15 }}
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
             >
-              <div className="text-5xl mb-4">{point.emoji}</div>
-              <p className="text-gray-300 text-lg leading-[1.7]">
-                &quot;{point.text}&quot;
-              </p>
-            </motion.div>
+              <Image
+                src={item.image}
+                alt={`도포 인스타 콘텐츠 ${index + 1}`}
+                width={400}
+                height={400}
+                className="w-full h-auto"
+              />
+            </motion.a>
           ))}
         </div>
 

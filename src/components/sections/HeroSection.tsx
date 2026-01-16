@@ -45,7 +45,7 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
 
             <p className="text-lg sm:text-xl text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-[1.8]">
               남들한텐 &quot;그냥 그래&quot;라고 둘러댔지만,
-              <br className="hidden sm:block" />
+              <br />
               사실은 안 괜찮은 거 다 알아.
               <br />
               <span className="text-dopo-purple-light font-medium">

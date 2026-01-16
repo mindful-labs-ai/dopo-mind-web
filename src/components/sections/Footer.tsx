@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Instagram, Mail } from "lucide-react";
+import Image from "next/image";
 
 interface FooterProps {
   onOpenModal: () => void;
@@ -14,11 +15,27 @@ export default function Footer({ onOpenModal }: FooterProps) {
       <div className="bg-gradient-to-r from-dopo-purple to-dopo-purple-dark py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] opacity-50" />
         <div className="section-container text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-6"
+          >
+            <div className="inline-block bg-black/15 rounded-2xl">
+              <Image
+                src="/dopo-heart-cta.png"
+                alt="도포 하트"
+                width={144}
+                height={144}
+              />
+            </div>
+          </motion.div>
           <motion.p
             className="text-2xl sm:text-3xl font-bold mb-6 text-white leading-[1.5]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
           >
             더 늦기 전에, 내 마음을 안아주세요.
           </motion.p>
@@ -52,7 +69,7 @@ export default function Footer({ onOpenModal }: FooterProps) {
             {/* Social Links */}
             <div className="flex items-center justify-center md:justify-start gap-3">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/d0po.mind/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-background-card hover:bg-dopo-purple rounded-full flex items-center justify-center transition-colors border border-white/5"
@@ -61,7 +78,7 @@ export default function Footer({ onOpenModal }: FooterProps) {
                 <Instagram className="w-4 h-4 text-gray-400 hover:text-white" />
               </a>
               <a
-                href="mailto:contact@mindfullabs.kr"
+                href="mailto:honam.kang@mindfullabs.ai"
                 className="w-9 h-9 bg-background-card hover:bg-dopo-purple rounded-full flex items-center justify-center transition-colors border border-white/5"
                 aria-label="Email"
               >
