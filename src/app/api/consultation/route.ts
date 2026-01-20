@@ -16,17 +16,11 @@ interface ConsultationData {
 }
 
 export async function POST(request: NextRequest) {
-  console.log("=== Consultation API Called ===");
-
   try {
     const data: ConsultationData = await request.json();
-    console.log("Received data:", JSON.stringify(data, null, 2));
 
     const BASEROW_API_TOKEN = process.env.BASEROW_API_TOKEN;
     const BASEROW_TABLE_ID = process.env.BASEROW_TABLE_ID;
-
-    console.log("ENV Check - Token exists:", !!BASEROW_API_TOKEN);
-    console.log("ENV Check - Table ID:", BASEROW_TABLE_ID);
 
     if (!BASEROW_API_TOKEN || !BASEROW_TABLE_ID) {
       console.error("Missing Baserow environment variables");
