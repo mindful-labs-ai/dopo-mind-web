@@ -47,6 +47,8 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showCrisisAlert, setShowCrisisAlert] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -103,14 +105,38 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   };
 
   const onSubmit = async (data: FormData) => {
-    console.log("Form submitted:", data);
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/consultation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("신청 중 오류가 발생했습니다.");
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Submit error:", error);
+      setSubmitError(
+        error instanceof Error ? error.message : "신청 중 오류가 발생했습니다. 다시 시도해주세요."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
     setStep(1);
     setIsSubmitted(false);
     setShowCrisisAlert(false);
+    setSubmitError(null);
     reset();
     onClose();
   };
@@ -195,10 +221,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
             <div className="flex-shrink-0 bg-background-dark z-10 px-6 py-4 border-b border-white/10">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-sage/20 rounded-full flex items-center justify-center">
-                    <span className="text-sage text-sm">MT</span>
-                  </div>
-                  <span className="font-bold text-sage">마음토스</span>
+                  <span className="font-bold text-sage">마음토스 상담센터 상담문의</span>
                 </div>
                 <button
                   onClick={handleClose}
@@ -689,12 +712,18 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
               {/* Footer buttons */}
               {!isSubmitted && (
                 <div className="flex-shrink-0 bg-background-dark border-t border-white/10 px-6 py-4">
+                  {submitError && (
+                    <p className="text-red-400 text-sm mb-3 text-center">
+                      {submitError}
+                    </p>
+                  )}
                   <div className="flex gap-3">
                     {step > 1 && (
                       <button
                         type="button"
                         onClick={handleBack}
-                        className="flex items-center justify-center gap-1 px-6 py-3 rounded-xl border border-white/10 text-text-muted hover:bg-white/5 transition-colors"
+                        disabled={isSubmitting}
+                        className="flex items-center justify-center gap-1 px-6 py-3 rounded-xl border border-white/10 text-text-muted hover:bg-white/5 transition-colors disabled:opacity-50"
                       >
                         <ChevronLeft className="w-4 h-4" />
                         이전
@@ -712,9 +741,10 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                     ) : (
                       <button
                         type="submit"
-                        className="flex-1 py-3 rounded-xl bg-sage hover:bg-sage-dark text-white font-semibold transition-colors glow-sm"
+                        disabled={isSubmitting}
+                        className="flex-1 py-3 rounded-xl bg-sage hover:bg-sage-dark text-white font-semibold transition-colors glow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        신청 완료
+                        {isSubmitting ? "신청 중..." : "신청 완료"}
                       </button>
                     )}
                   </div>
