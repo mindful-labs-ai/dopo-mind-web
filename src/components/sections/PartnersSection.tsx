@@ -64,7 +64,7 @@ export default function PartnersSection() {
           {partners.map((partner, index) => (
             <motion.div
               key={partner.name}
-              className="card p-4 flex items-center justify-center h-24 hover:bg-background-elevated transition-colors relative"
+              className="card flex items-center justify-center h-24 hover:bg-background-elevated transition-colors relative overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 * index }}
@@ -73,7 +73,7 @@ export default function PartnersSection() {
                 src={partner.logo}
                 alt={partner.name}
                 fill
-                className="object-contain p-3 opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                className="object-contain opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
               />
             </motion.div>
           ))}

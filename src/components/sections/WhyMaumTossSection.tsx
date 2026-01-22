@@ -8,8 +8,8 @@ import { GraduationCap, Shield, Users } from "lucide-react";
 const comparisonData = [
   {
     category: "비용",
-    general: "10~15만원",
-    maumtoss: "1.8만원",
+    general: "5~10만원",
+    maumtoss: "2만원",
     highlight: true,
   },
   {
@@ -127,7 +127,7 @@ export default function WhyMaumTossSection() {
                 <span className="text-sm text-text-muted">일반 사설 센터</span>
               </div>
               <div className="p-4 text-center border-l border-divider-light bg-sage/5">
-                <span className="text-sm text-sage font-medium">마음토스</span>
+                <span className="text-sm text-sage font-medium">마음토스 상담센터</span>
               </div>
             </div>
 
