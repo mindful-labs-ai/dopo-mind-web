@@ -73,7 +73,7 @@ export default function PartnersSection() {
                 src={partner.logo}
                 alt={partner.name}
                 fill
-                className="object-contain opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                className="object-contain"
               />
             </motion.div>
           ))}
