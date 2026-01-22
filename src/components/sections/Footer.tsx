@@ -87,7 +87,7 @@ export default function Footer({ onOpenModal }: FooterProps) {
         </div>
 
         {/* Divider */}
-        <div className="border-t border-white/5 my-8" />
+        <div className="border-t border-divider-light my-8" />
 
         {/* Bottom links */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-text-subtle">

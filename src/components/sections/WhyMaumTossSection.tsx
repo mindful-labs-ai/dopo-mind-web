@@ -41,7 +41,7 @@ export default function WhyMaumTossSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text mb-6">
-            왜 마음토스는{" "}
+            왜 마음토스 상담센터는{" "}
             <span className="text-sage">저렴하면서 전문적</span>인가요?
           </h2>
         </motion.div>
@@ -123,10 +123,10 @@ export default function WhyMaumTossSection() {
               <div className="p-4 text-center">
                 <span className="text-sm text-text-subtle">항목</span>
               </div>
-              <div className="p-4 text-center border-l border-white/5">
+              <div className="p-4 text-center border-l border-divider-light">
                 <span className="text-sm text-text-muted">일반 사설 센터</span>
               </div>
-              <div className="p-4 text-center border-l border-sage/20 bg-sage/5">
+              <div className="p-4 text-center border-l border-divider-light bg-sage/5">
                 <span className="text-sm text-sage font-medium">마음토스</span>
               </div>
             </div>
@@ -137,17 +137,17 @@ export default function WhyMaumTossSection() {
                 key={row.category}
                 className={`grid grid-cols-3 ${
                   index !== comparisonData.length - 1
-                    ? "border-b border-white/5"
+                    ? "border-b border-divider-light"
                     : ""
                 }`}
               >
                 <div className="p-4 text-center">
                   <span className="text-sm text-text-muted">{row.category}</span>
                 </div>
-                <div className="p-4 text-center border-l border-white/5">
+                <div className="p-4 text-center border-l border-divider-light">
                   <span className="text-sm text-text-subtle">{row.general}</span>
                 </div>
-                <div className="p-4 text-center border-l border-sage/20 bg-sage/5">
+                <div className="p-4 text-center border-l border-divider-light bg-sage/5">
                   <span
                     className={`text-sm font-medium ${
                       row.highlight ? "text-sage-light text-base" : "text-sage"

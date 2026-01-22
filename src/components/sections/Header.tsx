@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 interface HeaderProps {
   onOpenModal: () => void;
@@ -73,7 +74,8 @@ export default function Header({ onOpenModal }: HeaderProps) {
             </nav>
 
             {/* Desktop CTA */}
-            <div className="hidden md:block">
+            <div className="hidden md:flex items-center gap-3">
+              <ThemeToggle />
               <button
                 onClick={onOpenModal}
                 className="bg-sage hover:bg-sage-dark text-white font-medium py-2.5 px-6 rounded-full transition-all duration-300 text-sm"
@@ -82,18 +84,21 @@ export default function Header({ onOpenModal }: HeaderProps) {
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              className="md:hidden p-2 text-text-muted hover:text-text transition-colors"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label={isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+            {/* Mobile Controls */}
+            <div className="flex items-center gap-2 md:hidden">
+              <ThemeToggle />
+              <button
+                className="p-2 text-text-muted hover:text-text transition-colors"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label={isMobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -118,7 +123,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
 
             {/* Menu Panel */}
             <motion.div
-              className="absolute top-16 left-0 right-0 bg-background-dark border-b border-white/10 shadow-xl"
+              className="absolute top-16 left-0 right-0 bg-background-dark border-b border-divider shadow-xl"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -135,7 +140,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
                       {link.label}
                     </button>
                   ))}
-                  <div className="pt-4 border-t border-white/10">
+                  <div className="pt-4 border-t border-divider">
                     <button
                       onClick={() => {
                         setIsMobileMenuOpen(false);

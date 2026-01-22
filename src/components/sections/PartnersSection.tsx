@@ -8,27 +8,27 @@ import Image from "next/image";
 const partners = [
   {
     name: "파트너 기관 1",
-    logo: "/partners/partner-1.png",
+    logo: "/partners/partner-logo-01.png",
   },
   {
     name: "파트너 기관 2",
-    logo: "/partners/partner-2.png",
+    logo: "/partners/partner-logo-01.png",
   },
   {
     name: "파트너 기관 3",
-    logo: "/partners/partner-3.png",
+    logo: "/partners/partner-logo-01.png",
   },
   {
     name: "파트너 기관 4",
-    logo: "/partners/partner-4.png",
+    logo: "/partners/partner-logo-01.png",
   },
   {
     name: "파트너 기관 5",
-    logo: "/partners/partner-5.png",
+    logo: "/partners/partner-logo-01.png",
   },
   {
     name: "파트너 기관 6",
-    logo: "/partners/partner-6.png",
+    logo: "/partners/partner-logo-01.png",
   },
 ];
 
@@ -50,7 +50,7 @@ export default function PartnersSection() {
             제휴 기관
           </h2>
           <p className="text-text-muted">
-            마음토스와 함께하는 파트너들입니다.
+            마음토스 상담센터와 함께하는 파트너들입니다.
           </p>
         </motion.div>
 
@@ -64,7 +64,7 @@ export default function PartnersSection() {
           {partners.map((partner, index) => (
             <motion.div
               key={partner.name}
-              className="card p-6 flex items-center justify-center h-24 hover:bg-background-elevated transition-colors"
+              className="card p-4 flex items-center justify-center h-24 hover:bg-background-elevated transition-colors relative"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 * index }}
@@ -72,9 +72,8 @@ export default function PartnersSection() {
               <Image
                 src={partner.logo}
                 alt={partner.name}
-                width={120}
-                height={40}
-                className="max-h-10 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                fill
+                className="object-contain p-3 opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
               />
             </motion.div>
           ))}

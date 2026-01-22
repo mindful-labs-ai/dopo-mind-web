@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,26 +10,30 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // MaumToss Deep Forest & Calm Night theme
+        // MaumToss theme - CSS 변수 참조
         sage: {
-          DEFAULT: "#6A9C78",
-          light: "#C4D7B2",
-          dark: "#5A8A68",
+          DEFAULT: "var(--sage)",
+          light: "var(--sage-light)",
+          dark: "var(--sage-dark)",
         },
         background: {
-          DEFAULT: "#1A1A1A",
-          dark: "#121212",
-          card: "#2C2C2C",
-          elevated: "#363636",
+          DEFAULT: "var(--background)",
+          dark: "var(--background-dark)",
+          card: "var(--background-card)",
+          elevated: "var(--background-elevated)",
         },
         text: {
-          DEFAULT: "#E0E0E0",
-          muted: "#A0A0A0",
-          subtle: "#707070",
+          DEFAULT: "var(--text)",
+          muted: "var(--text-muted)",
+          subtle: "var(--text-subtle)",
         },
-        accent: "#6A9C78",
-        "accent-light": "#C4D7B2",
-        "accent-dark": "#5A8A68",
+        accent: "var(--sage)",
+        "accent-light": "var(--sage-light)",
+        "accent-dark": "var(--sage-dark)",
+        divider: {
+          DEFAULT: "var(--border)",
+          light: "var(--border-light)",
+        },
       },
       fontFamily: {
         pretendard: ["Pretendard", "sans-serif"],

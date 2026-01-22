@@ -78,7 +78,7 @@ export default function ServiceDetailSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <div className="bg-background-card/50 rounded-xl p-6 border border-white/5">
+          <div className="bg-background-card/50 rounded-xl p-6 border border-divider-light">
             <p className="text-sm text-text-subtle text-center">
               <span className="text-text-muted">참고:</span> 자살 위기, 중독, 심각한 트라우마 등은
               <br className="sm:hidden" />{" "}

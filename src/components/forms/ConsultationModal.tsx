@@ -176,7 +176,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <div className="bg-background-card rounded-2xl p-8 max-w-md mx-auto border border-white/10 text-center">
+                <div className="bg-background-card rounded-2xl p-8 max-w-md mx-auto border border-divider text-center">
                   <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <AlertTriangle className="w-8 h-8 text-yellow-500" />
                   </div>
@@ -211,14 +211,14 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
           {/* Modal */}
           <motion.div
-            className="relative w-full max-w-lg bg-background-dark rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] border border-white/10 flex flex-col"
+            className="relative w-full max-w-lg bg-background-dark rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] border border-divider flex flex-col"
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: "spring", duration: 0.5 }}
           >
             {/* Header */}
-            <div className="flex-shrink-0 bg-background-dark z-10 px-6 py-4 border-b border-white/10">
+            <div className="flex-shrink-0 bg-background-dark z-10 px-6 py-4 border-b border-divider">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-sage">마음토스 상담센터 상담문의</span>
@@ -275,7 +275,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           </label>
                           <input
                             {...register("name")}
-                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
+                            className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="홍길동"
                           />
                           {errors.name && (
@@ -291,7 +291,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           </label>
                           <input
                             {...register("phone")}
-                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
+                            className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="010-1234-5678"
                           />
                           {errors.phone && (
@@ -308,7 +308,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           <input
                             {...register("birthYear")}
                             type="number"
-                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
+                            className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="1995"
                           />
                           {errors.birthYear && (
@@ -329,7 +329,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                                 className={`flex-1 py-3 px-4 rounded-xl border-2 text-center cursor-pointer transition-all ${
                                   watchedValues.gender === option.value
                                     ? "border-sage bg-sage/20 text-sage-light"
-                                    : "border-white/10 text-text-muted hover:border-sage/50"
+                                    : "border-divider text-text-muted hover:border-sage/50"
                                 }`}
                               >
                                 <input
@@ -387,7 +387,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                                 className={`py-3 px-4 rounded-xl border-2 text-center cursor-pointer transition-all ${
                                   watchedValues.consultationType === option.value
                                     ? "border-sage bg-sage/20 text-sage-light"
-                                    : "border-white/10 text-text-muted hover:border-sage/50"
+                                    : "border-divider text-text-muted hover:border-sage/50"
                                 }`}
                               >
                                 <input
@@ -415,7 +415,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                             </label>
                             <input
                               {...register("preferredRegion")}
-                              className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
+                              className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                               placeholder="예: 홍대, 강남 등"
                             />
                           </div>
@@ -434,7 +434,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                                 className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${
                                   watchedValues.availableDays?.includes(day.value)
                                     ? "border-sage bg-sage text-white"
-                                    : "border-white/10 text-text-muted hover:border-sage/50"
+                                    : "border-divider text-text-muted hover:border-sage/50"
                                 }`}
                               >
                                 {day.label}
@@ -461,7 +461,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                                 className={`w-full py-3 px-4 rounded-xl border-2 text-left transition-all ${
                                   watchedValues.availableTimes?.includes(time.value)
                                     ? "border-sage bg-sage/20 text-sage-light"
-                                    : "border-white/10 text-text-muted hover:border-sage/50"
+                                    : "border-divider text-text-muted hover:border-sage/50"
                                 }`}
                               >
                                 {time.label}
@@ -510,7 +510,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                                 className={`w-full py-3 px-4 rounded-xl border-2 text-left transition-all flex items-center gap-3 ${
                                   watchedValues.concerns?.includes(concern.value)
                                     ? "border-sage bg-sage/20"
-                                    : "border-white/10 hover:border-sage/50"
+                                    : "border-divider hover:border-sage/50"
                                 }`}
                               >
                                 <div
@@ -550,13 +550,13 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           </label>
                           <textarea
                             {...register("additionalDescription")}
-                            className="w-full px-4 py-3 rounded-xl border border-white/10 bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all resize-none h-24"
+                            className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all resize-none h-24"
                             placeholder="상담사에게 미리 전달하고 싶은 내용이 있다면 적어주세요."
                           />
                         </div>
 
                         {/* Screening Questions */}
-                        <div className="pt-4 border-t border-white/10">
+                        <div className="pt-4 border-t border-divider">
                           <p className="text-sm font-medium text-text-muted mb-4">
                             사전 확인 질문
                           </p>
@@ -608,7 +608,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                       </div>
 
                       <div className="space-y-4">
-                        <label className="flex items-start gap-3 p-4 rounded-xl bg-background-card cursor-pointer border border-white/5">
+                        <label className="flex items-start gap-3 p-4 rounded-xl bg-background-card cursor-pointer border border-divider-light">
                           <input
                             type="checkbox"
                             {...register("agreePrivacy")}
@@ -629,7 +629,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           </p>
                         )}
 
-                        <label className="flex items-start gap-3 p-4 rounded-xl bg-background-card cursor-pointer border border-white/5">
+                        <label className="flex items-start gap-3 p-4 rounded-xl bg-background-card cursor-pointer border border-divider-light">
                           <input
                             type="checkbox"
                             {...register("agreeRecording")}
@@ -645,7 +645,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           </div>
                         </label>
 
-                        <label className="flex items-start gap-3 p-4 rounded-xl bg-background-card cursor-pointer border border-white/5">
+                        <label className="flex items-start gap-3 p-4 rounded-xl bg-background-card cursor-pointer border border-divider-light">
                           <input
                             type="checkbox"
                             {...register("agreeCancelPolicy")}
@@ -711,7 +711,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
               {/* Footer buttons */}
               {!isSubmitted && (
-                <div className="flex-shrink-0 bg-background-dark border-t border-white/10 px-6 py-4">
+                <div className="flex-shrink-0 bg-background-dark border-t border-divider px-6 py-4">
                   {submitError && (
                     <p className="text-red-400 text-sm mb-3 text-center">
                       {submitError}
@@ -723,7 +723,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                         type="button"
                         onClick={handleBack}
                         disabled={isSubmitting}
-                        className="flex items-center justify-center gap-1 px-6 py-3 rounded-xl border border-white/10 text-text-muted hover:bg-white/5 transition-colors disabled:opacity-50"
+                        className="flex items-center justify-center gap-1 px-6 py-3 rounded-xl border border-divider text-text-muted hover:bg-white/5 transition-colors disabled:opacity-50"
                       >
                         <ChevronLeft className="w-4 h-4" />
                         이전

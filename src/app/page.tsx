@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Header from "@/components/sections/Header";
 import HeroSection from "@/components/sections/HeroSection";
+import DopoContentSection from "@/components/sections/DopoContentSection";
 import WhyMaumTossSection from "@/components/sections/WhyMaumTossSection";
 import ServiceDetailSection from "@/components/sections/ServiceDetailSection";
 import ProcessSection from "@/components/sections/ProcessSection";
@@ -24,6 +25,7 @@ export default function Home() {
     <main className="min-h-screen">
       <Header onOpenModal={openModal} />
       <HeroSection onOpenModal={openModal} />
+      <DopoContentSection />
       <WhyMaumTossSection />
       <ServiceDetailSection />
       <ProcessSection />
