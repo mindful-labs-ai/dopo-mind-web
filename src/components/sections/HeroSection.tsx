@@ -70,7 +70,7 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <span className="px-4 py-2 bg-black/10 dark:bg-white/10 backdrop-blur-sm rounded-full text-sm text-text-muted dark:text-white/90 border border-black/20 dark:border-white/20">
-              회당 18,000원
+              회당 20,000원
             </span>
             <span className="px-4 py-2 bg-sage/20 dark:bg-sage/30 backdrop-blur-sm rounded-full text-sm text-sage dark:text-white border border-sage/30 dark:border-sage/40">
               첫 상담 무료

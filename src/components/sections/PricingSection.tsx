@@ -45,7 +45,7 @@ export default function PricingSection({ onOpenModal }: PricingSectionProps) {
                 <span className="text-sm text-text-muted">1회기 상담료</span>
               </div>
               <div className="mb-4">
-                <span className="text-4xl font-bold text-text">18,000</span>
+                <span className="text-4xl font-bold text-text">20,000</span>
                 <span className="text-text-muted">원</span>
               </div>
               <p className="text-sm text-text-subtle">50분 기준</p>
