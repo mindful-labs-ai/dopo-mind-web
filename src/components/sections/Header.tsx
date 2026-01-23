@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 interface HeaderProps {
@@ -10,13 +12,15 @@ interface HeaderProps {
 }
 
 const navLinks = [
-  { label: "서비스 소개", href: "#why-maumtoss" },
-  { label: "상담 안내", href: "#process" },
-  { label: "비용 안내", href: "#pricing" },
-  { label: "자주 묻는 질문", href: "#faq" },
+  { label: "서비스 소개", href: "#why-maumtoss", isExternal: false },
+  { label: "상담 안내", href: "#process", isExternal: false },
+  { label: "비용 안내", href: "#pricing", isExternal: false },
+  { label: "자주 묻는 질문", href: "/faq", isExternal: true },
 ];
 
 export default function Header({ onOpenModal }: HeaderProps) {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -31,9 +35,13 @@ export default function Header({ onOpenModal }: HeaderProps) {
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (isHomePage) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      window.location.href = `/${href}`;
     }
   };
 
@@ -62,15 +70,25 @@ export default function Header({ onOpenModal }: HeaderProps) {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => handleNavClick(link.href)}
-                  className="text-sm text-text-muted hover:text-text transition-colors"
-                >
-                  {link.label}
-                </button>
-              ))}
+              {navLinks.map((link) =>
+                link.isExternal ? (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm text-text-muted hover:text-text transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.href}
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-sm text-text-muted hover:text-text transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                )
+              )}
             </nav>
 
             {/* Desktop CTA */}
@@ -131,15 +149,26 @@ export default function Header({ onOpenModal }: HeaderProps) {
             >
               <nav className="section-container py-6">
                 <div className="flex flex-col gap-4">
-                  {navLinks.map((link) => (
-                    <button
-                      key={link.href}
-                      onClick={() => handleNavClick(link.href)}
-                      className="text-left text-text-muted hover:text-text transition-colors py-2"
-                    >
-                      {link.label}
-                    </button>
-                  ))}
+                  {navLinks.map((link) =>
+                    link.isExternal ? (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-left text-text-muted hover:text-text transition-colors py-2"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <button
+                        key={link.href}
+                        onClick={() => handleNavClick(link.href)}
+                        className="text-left text-text-muted hover:text-text transition-colors py-2"
+                      >
+                        {link.label}
+                      </button>
+                    )
+                  )}
                   <div className="pt-4 border-t border-divider">
                     <button
                       onClick={() => {

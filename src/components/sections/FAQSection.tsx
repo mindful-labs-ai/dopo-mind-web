@@ -2,35 +2,11 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { faqs, MAIN_FAQ_COUNT } from "@/constants/faq-data";
 
-const faqs = [
-  {
-    question: "상담사는 누가 배정되나요?",
-    answer:
-      "상담심리 전공 석/박사 과정에 재학 중이거나 졸업한 수련생이 배정됩니다. 모든 상담사는 교수급 전문가의 슈퍼비전(지도 감독)을 받으며 체계적인 훈련을 진행하고 있습니다.",
-  },
-  {
-    question: "중장년층도 가능한가요?",
-    answer:
-      "본 프로그램은 20-40대를 주 대상으로 하며, 그 외 연령대는 별도 문의 바랍니다. 상담 신청 시 적합성을 먼저 확인해드립니다.",
-  },
-  {
-    question: "상담 장소는 어디인가요?",
-    answer:
-      "홍대입구역 도보 5분 거리 마음토스 상담센터에서 진행됩니다. 대면 상담을 원칙으로 하고 있습니다.",
-  },
-  {
-    question: "상담 내용은 정말 비밀인가요?",
-    answer:
-      "네, 모든 상담 내용은 철저히 비밀이 보장됩니다. 단, 내담자나 타인의 생명에 위험이 있거나 법적 요구가 있는 경우 등 예외적인 상황에서는 비밀보장이 제한될 수 있습니다.",
-  },
-  {
-    question: "상담 시간은 어떻게 되나요?",
-    answer:
-      "1회 상담은 50분 동안 진행됩니다. 매주 동일한 요일/시간에 정기적으로 진행하는 것을 원칙으로 합니다.",
-  },
-];
+const displayFaqs = faqs.slice(0, MAIN_FAQ_COUNT);
 
 export default function FAQSection() {
   const ref = useRef(null);
@@ -59,7 +35,7 @@ export default function FAQSection() {
 
           {/* FAQ Items */}
           <div className="space-y-4">
-            {faqs.map((faq, index) => (
+            {displayFaqs.map((faq, index) => (
               <motion.div
                 key={index}
                 className="card overflow-hidden"
@@ -92,7 +68,7 @@ export default function FAQSection() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="px-6 pb-5 text-text-muted leading-relaxed">
+                      <div className="px-6 pb-5 text-text-muted leading-relaxed whitespace-pre-line">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -101,6 +77,22 @@ export default function FAQSection() {
               </motion.div>
             ))}
           </div>
+
+          {/* View All Button */}
+          <motion.div
+            className="mt-10 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.6 }}
+          >
+            <Link
+              href="/faq"
+              className="inline-flex items-center gap-2 text-sage hover:text-sage-dark font-medium transition-colors group"
+            >
+              FAQ 전체 보기
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -74,6 +74,19 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   });
 
   const watchedValues = watch();
+
+  // 모달이 열릴 때 body 스크롤 방지
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const handleNext = async () => {
     let fieldsToValidate: (keyof FormData)[] = [];
