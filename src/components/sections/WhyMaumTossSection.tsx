@@ -103,7 +103,7 @@ export default function WhyMaumTossSection() {
             </div>
             <h3 className="font-semibold text-text mb-2">윤리 규정 준수</h3>
             <p className="text-sm text-text-muted">
-              한국상담심리학회
+              한국상담학회
               <br />
               윤리 규정 준수
             </p>
