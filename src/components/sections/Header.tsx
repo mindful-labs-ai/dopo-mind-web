@@ -12,7 +12,7 @@ interface HeaderProps {
 }
 
 const navLinks = [
-  { label: "서비스 소개", href: "#why-maumtoss", isExternal: false },
+  { label: "서비스 소개", href: "#why-andanotherlife", isExternal: false },
   { label: "상담 안내", href: "#process", isExternal: false },
   { label: "비용 안내", href: "#pricing", isExternal: false },
   { label: "자주 묻는 질문", href: "/faq", isExternal: true },
@@ -65,7 +65,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
-              마음토스 상담센터
+              앤아더라이프
             </a>
 
             {/* Desktop Navigation */}
@@ -98,7 +98,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
                 onClick={onOpenModal}
                 className="bg-sage hover:bg-sage-dark text-white font-medium py-2.5 px-6 rounded-full transition-all duration-300 text-sm"
               >
-                상담 신청
+                부담 없이 시작하기
               </button>
             </div>
 
@@ -177,7 +177,7 @@ export default function Header({ onOpenModal }: HeaderProps) {
                       }}
                       className="w-full bg-sage hover:bg-sage-dark text-white font-medium py-3 px-6 rounded-full transition-all duration-300"
                     >
-                      상담 신청
+                      부담 없이 시작하기
                     </button>
                   </div>
                 </div>

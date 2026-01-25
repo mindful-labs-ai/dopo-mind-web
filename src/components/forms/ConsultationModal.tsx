@@ -234,7 +234,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
             <div className="flex-shrink-0 bg-background-dark z-10 px-6 py-4 border-b border-divider">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-sage">마음토스 상담센터 상담문의</span>
+                  <span className="font-bold text-sage">앤아더라이프 상담문의</span>
                 </div>
                 <button
                   onClick={handleClose}

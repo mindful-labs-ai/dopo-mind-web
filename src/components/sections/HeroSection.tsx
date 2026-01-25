@@ -32,7 +32,7 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
             transition={{ duration: 0.6 }}
           >
             <span className="inline-block px-5 py-2.5 bg-black/10 dark:bg-white/10 backdrop-blur-sm rounded-full text-text dark:text-white/90 text-sm sm:text-base font-medium border border-black/20 dark:border-white/20">
-              도포 x 마음토스 상담센터
+              도포 x 심리상담 연구소 앤아더라이프
             </span>
           </motion.div>
 
@@ -43,10 +43,10 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <span className="block leading-[1.4] mb-2">어두운 마음 속,</span>
+            <span className="block leading-[1.4] mb-2">상담, 부담스럽게 느껴졌다면.</span>
             <span className="block leading-[1.4]">
-              부담 없이 켜는{" "}
-              <span className="text-sage dark:text-sage-light">전문 상담</span>의 불빛.
+              이제는{" "}
+              <span className="text-sage dark:text-sage-light">가볍게</span> 시작해보세요.
             </span>
           </motion.h1>
 
@@ -57,9 +57,9 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            상담심리 전공 석·박사 수련생과 함께하는
-            <br className="hidden sm:block" />
-            전문 심리상담, <span className="text-text dark:text-white font-medium">마음토스 상담센터</span>에서 시작하세요.
+            합리적인 가격으로 만나는 전문 심리상담,
+            <br />
+            <span className="text-text dark:text-white font-medium">심리상담 연구소 앤아더라이프</span>에서 첫 걸음을 내딛어보세요.
           </motion.p>
 
           {/* Key value badges */}
@@ -90,7 +90,7 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            상담 신청하러 가기
+            가볍게 첫 상담 시작하기
           </motion.button>
 
           <motion.p

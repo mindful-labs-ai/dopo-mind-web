@@ -41,7 +41,7 @@ export default function Footer({ onOpenModal }: FooterProps) {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            상담 신청하기
+            부담 없이 첫 상담 시작하기
           </motion.button>
         </div>
       </div>
@@ -52,7 +52,7 @@ export default function Footer({ onOpenModal }: FooterProps) {
           {/* Logo & Info */}
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
-              <span className="text-xl font-bold text-text">마음토스 상담센터</span>
+              <span className="text-xl font-bold text-text">심리상담 연구소 앤아더라이프</span>
             </div>
             <p className="text-text-subtle text-sm mb-4">
               합리적인 비용으로 만나는 전문 심리상담
@@ -69,7 +69,7 @@ export default function Footer({ onOpenModal }: FooterProps) {
               </a>
               <div className="flex items-center justify-center md:justify-start gap-2">
                 <MapPin className="w-4 h-4" />
-                <span>홍대입구역 도보 5분</span>
+                <span>서울시 마포구 잔다리로 73, 5층</span>
               </div>
             </div>
           </div>

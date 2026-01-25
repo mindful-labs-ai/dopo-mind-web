@@ -3,28 +3,48 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Briefcase, Users, Heart, HelpCircle } from "lucide-react";
+import { Briefcase, Compass, Users, Heart, Cloud, Zap, ScanFace, HelpCircle } from "lucide-react";
 
 const concerns = [
   {
     icon: Briefcase,
-    title: "진로/직장",
-    description: "취업, 이직, 직장 내 스트레스",
+    title: "직장 스트레스",
+    description: "직장 상사와 매일 트러블이 있어요",
+  },
+  {
+    icon: Compass,
+    title: "진로 고민",
+    description: "이직을 해야 할지, 지금 회사에 남아야 할지 모르겠어요",
   },
   {
     icon: Users,
-    title: "대인관계",
-    description: "가족, 연인, 친구와의 반복되는 갈등",
+    title: "가족 관계",
+    description: "부모님과의 관계가 늘 불편하고 힘들어요",
   },
   {
     icon: Heart,
-    title: "정서",
-    description: "우울감, 불안, 무기력, 자기이해 부족",
+    title: "연인 관계",
+    description: "연인과 같은 문제로 반복해서 싸우게 돼요",
+  },
+  {
+    icon: Cloud,
+    title: "우울/무기력",
+    description: "아무것도 하기 싫고 매일이 무기력해요",
+  },
+  {
+    icon: Zap,
+    title: "불안/걱정",
+    description: "사소한 일에도 불안하고 걱정이 멈추지 않아요",
+  },
+  {
+    icon: ScanFace,
+    title: "자기 이해",
+    description: "내가 누구인지, 뭘 원하는지 잘 모르겠어요",
   },
   {
     icon: HelpCircle,
     title: "기타",
-    description: "일상에서 설명하기 어려운 심리적 불편감",
+    description: "말로 설명하기 어려운 심리적 불편감이 있어요",
   },
 ];
 
@@ -49,7 +69,7 @@ export default function ServiceDetailSection() {
 
         {/* Concerns Grid */}
         <motion.div
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -57,16 +77,16 @@ export default function ServiceDetailSection() {
           {concerns.map((concern, index) => (
             <motion.div
               key={concern.title}
-              className="card p-6 hover:bg-background-elevated transition-colors"
+              className="card p-5 hover:bg-background-elevated transition-colors"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 * index }}
+              transition={{ duration: 0.4, delay: 0.05 * index }}
             >
-              <div className="w-12 h-12 bg-sage/10 rounded-xl flex items-center justify-center mb-4">
-                <concern.icon className="w-6 h-6 text-sage" />
+              <div className="w-10 h-10 bg-sage/10 rounded-xl flex items-center justify-center mb-3">
+                <concern.icon className="w-5 h-5 text-sage" />
               </div>
-              <h3 className="font-semibold text-text mb-2">{concern.title}</h3>
-              <p className="text-sm text-text-muted">{concern.description}</p>
+              <h3 className="font-semibold text-text mb-1.5 text-sm">{concern.title}</h3>
+              <p className="text-sm text-text-muted leading-relaxed">{concern.description}</p>
             </motion.div>
           ))}
         </motion.div>

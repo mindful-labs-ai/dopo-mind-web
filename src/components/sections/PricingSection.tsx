@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check, Sun } from "lucide-react";
+import { Check } from "lucide-react";
 
 interface PricingSectionProps {
   onOpenModal: () => void;
@@ -32,9 +32,9 @@ export default function PricingSection({ onOpenModal }: PricingSectionProps) {
         </motion.div>
 
         {/* Pricing Cards */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           <motion.div
-            className="grid md:grid-cols-3 gap-6"
+            className="grid md:grid-cols-2 gap-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -68,22 +68,6 @@ export default function PricingSection({ onOpenModal }: PricingSectionProps) {
                 라포 형성
               </p>
             </div>
-
-            {/* Daytime Discount */}
-            <div className="card p-8 text-center">
-              <div className="mb-4 flex items-center justify-center gap-2">
-                <Sun className="w-4 h-4 text-sage" />
-                <span className="text-sm text-text-muted">평일 낮 할인</span>
-              </div>
-              <div className="mb-4">
-                <span className="text-2xl font-bold text-text">+1회 무료</span>
-              </div>
-              <p className="text-sm text-text-subtle">
-                평일 10시~17시 상담 시
-                <br />
-                총 2회 무료 제공
-              </p>
-            </div>
           </motion.div>
 
           {/* Note */}
@@ -112,7 +96,7 @@ export default function PricingSection({ onOpenModal }: PricingSectionProps) {
               onClick={onOpenModal}
               className="btn-primary"
             >
-              첫 상담 무료로 시작하기
+              부담 없이 첫 상담 시작하기
             </button>
           </motion.div>
         </div>

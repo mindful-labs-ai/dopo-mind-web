@@ -9,29 +9,29 @@ const comparisonData = [
   {
     category: "비용",
     general: "5~10만원",
-    maumtoss: "2만원",
+    ours: "2만원",
     highlight: true,
   },
   {
     category: "자격",
     general: "민간 자격증 혼재",
-    maumtoss: "전공 석/박사 과정",
+    ours: "한국상담학회 전문상담사 수련과정",
     highlight: false,
   },
   {
     category: "관리",
     general: "개인 역량 의존",
-    maumtoss: "전문가 슈퍼비전 필수",
+    ours: "전문가 슈퍼비전 필수",
     highlight: false,
   },
 ];
 
-export default function WhyMaumTossSection() {
+export default function WhyProfessionalSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="why-maumtoss" className="py-24 bg-background-dark" ref={ref}>
+    <section id="why-professional" className="py-24 bg-background-dark" ref={ref}>
       <div className="section-container">
         {/* Title */}
         <motion.div
@@ -41,7 +41,7 @@ export default function WhyMaumTossSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text mb-6">
-            왜 마음토스 상담센터는{" "}
+            왜 심리상담 연구소 앤아더라이프는{" "}
             <span className="text-sage">저렴하면서 전문적</span>인가요?
           </h2>
         </motion.div>
@@ -55,7 +55,7 @@ export default function WhyMaumTossSection() {
         >
           <div className="card p-8">
             <p className="text-text-muted text-lg leading-relaxed">
-              마음토스의 상담사는 단순 아르바이트가 아닙니다.
+              앤아더라이프의 상담사는 단순 아르바이트가 아닙니다.
               <br className="hidden sm:block" />
               정식 전문가 자격 취득을 목표로 대학원 석·박사 과정에서
               <br className="hidden sm:block" />
@@ -127,7 +127,7 @@ export default function WhyMaumTossSection() {
                 <span className="text-sm text-text-muted">일반 사설 센터</span>
               </div>
               <div className="p-4 text-center border-l border-divider-light bg-sage/5">
-                <span className="text-sm text-sage font-medium">마음토스 상담센터</span>
+                <span className="text-sm text-sage font-medium">앤아더라이프</span>
               </div>
             </div>
 
@@ -153,7 +153,7 @@ export default function WhyMaumTossSection() {
                       row.highlight ? "text-sage-light text-base" : "text-sage"
                     }`}
                   >
-                    {row.maumtoss}
+                    {row.ours}
                   </span>
                 </div>
               </div>

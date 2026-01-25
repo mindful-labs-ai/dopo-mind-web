@@ -26,7 +26,7 @@ export default function FloatingCTA({ onClick }: FloatingCTAProps) {
         whileTap={{ scale: 0.95 }}
       >
         <MessageCircle className="w-5 h-5" />
-        <span>상담 신청하기</span>
+        <span>가볍게 상담 시작하기</span>
       </motion.button>
     </motion.div>
   );

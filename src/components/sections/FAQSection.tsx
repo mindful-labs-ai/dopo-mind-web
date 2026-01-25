@@ -89,7 +89,7 @@ export default function FAQSection() {
               href="/faq"
               className="inline-flex items-center gap-2 text-sage hover:text-sage-dark font-medium transition-colors group"
             >
-              FAQ 전체 보기
+              더 많은 질문 보기
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
