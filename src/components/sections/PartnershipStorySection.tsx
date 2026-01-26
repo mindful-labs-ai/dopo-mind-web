@@ -115,7 +115,7 @@ export default function PartnershipStorySection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <div className="card max-w-3xl mx-auto p-8">
+          <div className="card max-w-3xl mx-auto p-8 bg-[#FAF8F5]  dark:bg-white/5">
             <p className="text-lg text-text leading-relaxed">
               도포는 고민했습니다.
               <br />
