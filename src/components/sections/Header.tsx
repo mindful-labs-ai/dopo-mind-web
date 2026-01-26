@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 interface HeaderProps {
@@ -59,13 +60,26 @@ export default function Header({ onOpenModal }: HeaderProps) {
             {/* Logo */}
             <a
               href="#"
-              className="text-lg sm:text-xl font-bold text-text hover:text-sage transition-colors"
+              className="flex items-center"
               onClick={(e) => {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             >
-              앤아더라이프
+              <Image
+                src="/logo_notherlife_black.webp"
+                alt="앤아더라이프"
+                width={120}
+                height={32}
+                className="dark:hidden"
+              />
+              <Image
+                src="/logo_notherlife_white.webp"
+                alt="앤아더라이프"
+                width={120}
+                height={32}
+                className="hidden dark:block"
+              />
             </a>
 
             {/* Desktop Navigation */}
