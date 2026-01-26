@@ -51,7 +51,7 @@ export default function TargetSection() {
           {targets.map((target, index) => (
             <motion.div
               key={index}
-              className="relative aspect-square bg-white/50 dark:bg-white/5 rounded-2xl p-4 sm:p-6 flex flex-col items-center justify-between"
+              className="relative aspect-square bg-[#FAF8F5] dark:bg-white/5 rounded-2xl p-4 sm:p-6 flex flex-col items-center justify-between"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 * index }}

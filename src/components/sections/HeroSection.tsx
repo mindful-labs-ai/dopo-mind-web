@@ -32,7 +32,7 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
             transition={{ duration: 0.6 }}
           >
             <span className="inline-block px-5 py-2.5 bg-black/10 dark:bg-white/10 backdrop-blur-sm rounded-full text-text dark:text-white/90 text-sm sm:text-base font-medium border border-black/20 dark:border-white/20">
-              도포 x 심리상담 연구소 앤아더라이프
+              도포 x 심리상담연구소 앤아더라이프
             </span>
           </motion.div>
 
@@ -59,7 +59,7 @@ export default function HeroSection({ onOpenModal }: HeroSectionProps) {
           >
             합리적인 가격으로 만나는 전문 심리상담,
             <br />
-            <span className="text-text dark:text-white font-medium">심리상담 연구소 앤아더라이프</span>에서 첫 걸음을 내딛어보세요.
+            <span className="text-text dark:text-white font-medium">심리상담연구소 앤아더라이프</span>에서 첫 걸음을 내딛어보세요.
           </motion.p>
 
           {/* Key value badges */}

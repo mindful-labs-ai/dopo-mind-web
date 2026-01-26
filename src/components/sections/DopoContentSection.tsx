@@ -22,10 +22,10 @@ export default function DopoContentSection() {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block px-4 py-2 bg-sage/10 rounded-full text-sage text-sm font-medium mb-4">
-            도포 x 심리상담 연구소 앤아더라이프
+            도포 x 심리상담연구소 앤아더라이프
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text mb-4">
-            도포와 심리상담 연구소 앤아더라이프가 함께합니다.
+            도포와 심리상담연구소 앤아더라이프가 함께합니다.
           </h2>
           <p className="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed">
             도포의 인스타를 보며,{" "}
@@ -67,7 +67,7 @@ export default function DopoContentSection() {
             혼자 끙끙 앓지 않아도 괜찮아요.
             <br />
             <span className="text-text font-medium">
-              심리상담 연구소 앤아더라이프에서 편하게 이야기해보세요.
+              심리상담연구소 앤아더라이프에서 편하게 이야기해보세요.
             </span>
           </p>
         </motion.div>

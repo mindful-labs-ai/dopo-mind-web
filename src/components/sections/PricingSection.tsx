@@ -60,7 +60,7 @@ export default function PricingSection({ onOpenModal }: PricingSectionProps) {
                 <span className="text-sm text-sage">첫 상담</span>
               </div>
               <div className="mb-4">
-                <span className="text-4xl font-bold text-sage-light">무료</span>
+                <span className="text-4xl font-bold text-sage dark:text-sage-light">무료</span>
               </div>
               <p className="text-sm text-text-muted">
                 상담 적합성 확인 및

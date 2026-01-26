@@ -41,7 +41,7 @@ export default function WhyProfessionalSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-text mb-6">
-            왜 심리상담 연구소 앤아더라이프는{" "}
+            왜 심리상담연구소 앤아더라이프는{" "}
             <span className="text-sage">저렴하면서 전문적</span>인가요?
           </h2>
         </motion.div>

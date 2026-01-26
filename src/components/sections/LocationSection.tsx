@@ -76,7 +76,7 @@ export default function LocationSection() {
                   <div>
                     <h3 className="font-semibold text-text mb-1">교통 안내</h3>
                     <p className="text-text-muted">
-                      홍대입구역 도보 5분
+                      합정역 도보 5분, 홍대입구역 도보 10분
                     </p>
                   </div>
                 </div>

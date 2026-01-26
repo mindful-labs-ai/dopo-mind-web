@@ -52,7 +52,7 @@ export default function Footer({ onOpenModal }: FooterProps) {
           {/* Logo & Info */}
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-4">
-              <span className="text-xl font-bold text-text">심리상담 연구소 앤아더라이프</span>
+              <span className="text-xl font-bold text-text">도포 & 심리상담연구소 앤아더라이프</span>
             </div>
             <p className="text-text-subtle text-sm mb-4">
               합리적인 비용으로 만나는 전문 심리상담
@@ -61,11 +61,11 @@ export default function Footer({ onOpenModal }: FooterProps) {
             {/* Contact */}
             <div className="flex flex-col gap-2 text-sm text-text-muted">
               <a
-                href="mailto:contact@maumtoss.com"
+                href="mailto:business@mindfullabs.ai"
                 className="flex items-center justify-center md:justify-start gap-2 hover:text-sage transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                <span>contact@mindthos.com</span>
+                <span>business@mindfullabs.ai</span>
               </a>
               <div className="flex items-center justify-center md:justify-start gap-2">
                 <MapPin className="w-4 h-4" />

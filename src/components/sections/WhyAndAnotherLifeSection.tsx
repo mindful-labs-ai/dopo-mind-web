@@ -43,7 +43,7 @@ export default function WhyAndAnotherLifeSection() {
             <span className="text-sage">심리 치료 기반으로 얘기를 해보고 싶다면</span>
           </h2>
           <p className="text-text-muted max-w-2xl mx-auto">
-            심리상담 연구소 앤아더라이프는 전문성은 유지하면서도,
+            심리상담연구소 앤아더라이프는 전문성은 유지하면서도,
             비용 부담은 낮춘 새로운 선택지입니다.
           </p>
         </motion.div>

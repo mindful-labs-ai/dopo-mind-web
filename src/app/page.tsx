@@ -5,6 +5,7 @@ import Header from "@/components/sections/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import TargetSection from "@/components/sections/TargetSection";
 import DopoContentSection from "@/components/sections/DopoContentSection";
+import PartnershipStorySection from "@/components/sections/PartnershipStorySection";
 import WhyAndAnotherLifeSection from "@/components/sections/WhyAndAnotherLifeSection";
 import WhyProfessionalSection from "@/components/sections/WhyMaumTossSection";
 import ServiceDetailSection from "@/components/sections/ServiceDetailSection";
@@ -28,6 +29,7 @@ export default function Home() {
       <HeroSection onOpenModal={openModal} />
       <TargetSection />
       <DopoContentSection />
+      <PartnershipStorySection />
       <WhyAndAnotherLifeSection />
       <WhyProfessionalSection />
       <ServiceDetailSection />

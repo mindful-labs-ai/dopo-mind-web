@@ -18,7 +18,7 @@ const formSchema = z.object({
   }),
   // Step 2: 상담 방식 및 희망 일정
   consultationType: z.enum(["face-to-face", "online", "any"], {
-    required_error: "상담 방식을 선택해주세요",
+    errorMap: () => ({ message: "상담 방식을 선택해주세요" }),
   }),
   preferredRegion: z.string().optional(),
   availableDays: z.array(z.string()).min(1, "가능한 요일을 선택해주세요"),
@@ -92,21 +92,19 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     let fieldsToValidate: (keyof FormData)[] = [];
 
     if (step === 1) {
-      fieldsToValidate = ["name", "phone", "birthYear", "gender"];
+      fieldsToValidate = ["concerns"];
     } else if (step === 2) {
       fieldsToValidate = ["consultationType", "availableDays", "availableTimes"];
     } else if (step === 3) {
-      fieldsToValidate = ["concerns"];
-
-      // 자살 위기 체크
-      if (watchedValues.hasSuicidalRisk) {
-        setShowCrisisAlert(true);
-        return;
-      }
+      fieldsToValidate = ["name", "phone", "birthYear", "gender"];
     }
 
     const isValid = await trigger(fieldsToValidate);
     if (isValid) {
+      // 자살 위기 체크 (step 1에서만) - 알림 표시 후 계속 진행
+      if (step === 1 && watchedValues.hasSuicidalRisk) {
+        setShowCrisisAlert(true);
+      }
       setStep(step + 1);
     }
   };
@@ -251,7 +249,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                     <div
                       key={s}
                       className={`h-1 flex-1 rounded-full transition-colors ${
-                        s <= step ? "bg-sage" : "bg-white/10"
+                        s <= step ? "bg-sage" : "bg-[#E8E4DE] dark:bg-white/10"
                       }`}
                     />
                   ))}
@@ -263,10 +261,247 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col flex-1 overflow-hidden">
               <div className="flex-1 overflow-y-auto p-6">
                 <AnimatePresence mode="wait">
-                  {/* Step 1: Basic Info */}
+                  {/* Step 1: Concerns & Screening */}
                   {step === 1 && !isSubmitted && (
                     <motion.div
                       key="step1"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      className="space-y-6"
+                    >
+                      <div>
+                        <h3 className="text-xl font-bold text-text mb-2">
+                          상담 주제
+                        </h3>
+                        <p className="text-text-muted text-sm">
+                          어떤 고민으로 상담을 원하시나요?
+                        </p>
+                      </div>
+
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-text-muted mb-2">
+                            해당하는 고민을 선택해주세요 (복수 선택)
+                          </label>
+                          <div className="space-y-2">
+                            {CONCERN_OPTIONS.map((concern) => (
+                              <button
+                                key={concern.value}
+                                type="button"
+                                onClick={() => toggleArrayValue("concerns", concern.value)}
+                                className={`w-full py-3 px-4 rounded-xl border-2 text-left transition-all flex items-center gap-3 ${
+                                  watchedValues.concerns?.includes(concern.value)
+                                    ? "border-sage bg-sage/20"
+                                    : "border-divider hover:border-sage/50"
+                                }`}
+                              >
+                                <div
+                                  className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
+                                    watchedValues.concerns?.includes(concern.value)
+                                      ? "border-sage bg-sage"
+                                      : "border-text-subtle"
+                                  }`}
+                                >
+                                  {watchedValues.concerns?.includes(concern.value) && (
+                                    <Check className="w-3 h-3 text-white" />
+                                  )}
+                                </div>
+                                <span
+                                  className={
+                                    watchedValues.concerns?.includes(concern.value)
+                                      ? "text-sage-dark dark:text-sage-light"
+                                      : "text-text-muted"
+                                  }
+                                >
+                                  {concern.label}
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+                          {errors.concerns && (
+                            <p className="text-red-400 text-sm mt-1">
+                              {errors.concerns.message}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* Additional Description */}
+                        <div>
+                          <label className="block text-sm font-medium text-text-muted mb-2">
+                            부가 설명 (선택)
+                          </label>
+                          <textarea
+                            {...register("additionalDescription")}
+                            className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all resize-none h-24"
+                            placeholder="상담사에게 미리 전달하고 싶은 내용이 있다면 적어주세요."
+                          />
+                        </div>
+
+                        {/* Screening Questions */}
+                        <div className="pt-4 border-t border-divider">
+                          <p className="text-sm font-medium text-text-muted mb-4">
+                            사전 확인 질문
+                          </p>
+
+                          <div className="space-y-3">
+                            <label className="flex items-center gap-3 p-3 rounded-xl bg-background-card cursor-pointer">
+                              <input
+                                type="checkbox"
+                                {...register("hasSuicidalRisk")}
+                                className="w-4 h-4 rounded border-white/20 bg-background text-sage focus:ring-sage"
+                              />
+                              <span className="text-sm text-text-muted">
+                                자살 위기나 심각한 자해 위험이 있습니다.
+                              </span>
+                            </label>
+
+                            <label className="flex items-center gap-3 p-3 rounded-xl bg-background-card cursor-pointer">
+                              <input
+                                type="checkbox"
+                                {...register("hasPsychiatricTreatment")}
+                                className="w-4 h-4 rounded border-white/20 bg-background text-sage focus:ring-sage"
+                              />
+                              <span className="text-sm text-text-muted">
+                                현재 정신과 진료 또는 약물 복용 중입니다.
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Step 2: Schedule */}
+                  {step === 2 && !isSubmitted && (
+                    <motion.div
+                      key="step2"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      className="space-y-6"
+                    >
+                      <div>
+                        <h3 className="text-xl font-bold text-text mb-2">
+                          상담 방식 및 일정
+                        </h3>
+                        <p className="text-text-muted text-sm">
+                          상담은 매주 같은 요일/시간에 진행됩니다.
+                        </p>
+                      </div>
+
+                      <div className="space-y-4">
+                        {/* 상담 방식 선택 */}
+                        <div>
+                          <label className="block text-sm font-medium text-text-muted mb-2">
+                            상담 방식
+                          </label>
+                          <div className="grid grid-cols-3 gap-2">
+                            {[
+                              { value: "face-to-face", label: "대면" },
+                              { value: "online", label: "비대면" },
+                              { value: "any", label: "상관없음" },
+                            ].map((option) => (
+                              <label
+                                key={option.value}
+                                className={`py-3 px-4 rounded-xl border-2 text-center cursor-pointer transition-all ${
+                                  watchedValues.consultationType === option.value
+                                    ? "border-sage bg-sage/20 text-sage-dark dark:text-sage-light"
+                                    : "border-divider text-text-muted hover:border-sage/50"
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  value={option.value}
+                                  {...register("consultationType")}
+                                  className="sr-only"
+                                />
+                                {option.label}
+                              </label>
+                            ))}
+                          </div>
+                          {errors.consultationType && (
+                            <p className="text-red-400 text-sm mt-1">
+                              {errors.consultationType.message}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* 선호 지역 (대면 선택 시) */}
+                        {(watchedValues.consultationType === "face-to-face" || watchedValues.consultationType === "any") && (
+                          <div>
+                            <label className="block text-sm font-medium text-text-muted mb-1">
+                              선호하는 지역 (선택)
+                            </label>
+                            <input
+                              {...register("preferredRegion")}
+                              className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
+                              placeholder="예: 홍대, 강남 등"
+                            />
+                          </div>
+                        )}
+
+                        <div>
+                          <label className="block text-sm font-medium text-text-muted mb-2">
+                            가능한 요일 (복수 선택)
+                          </label>
+                          <div className="flex flex-wrap gap-2">
+                            {DAY_OPTIONS.map((day) => (
+                              <button
+                                key={day.value}
+                                type="button"
+                                onClick={() => toggleArrayValue("availableDays", day.value)}
+                                className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${
+                                  watchedValues.availableDays?.includes(day.value)
+                                    ? "border-sage bg-sage text-white"
+                                    : "border-divider text-text-muted hover:border-sage/50"
+                                }`}
+                              >
+                                {day.label}
+                              </button>
+                            ))}
+                          </div>
+                          {errors.availableDays && (
+                            <p className="text-red-400 text-sm mt-1">
+                              {errors.availableDays.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-text-muted mb-2">
+                            가능한 시간대 (복수 선택)
+                          </label>
+                          <div className="space-y-2">
+                            {TIME_OPTIONS.map((time) => (
+                              <button
+                                key={time.value}
+                                type="button"
+                                onClick={() => toggleArrayValue("availableTimes", time.value)}
+                                className={`w-full py-3 px-4 rounded-xl border-2 text-left transition-all ${
+                                  watchedValues.availableTimes?.includes(time.value)
+                                    ? "border-sage bg-sage/20 text-sage-dark dark:text-sage-light"
+                                    : "border-divider text-text-muted hover:border-sage/50"
+                                }`}
+                              >
+                                {time.label}
+                              </button>
+                            ))}
+                          </div>
+                          {errors.availableTimes && (
+                            <p className="text-red-400 text-sm mt-1">
+                              {errors.availableTimes.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* Step 3: Basic Info */}
+                  {step === 3 && !isSubmitted && (
+                    <motion.div
+                      key="step3"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
@@ -341,7 +576,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                                 key={option.value}
                                 className={`flex-1 py-3 px-4 rounded-xl border-2 text-center cursor-pointer transition-all ${
                                   watchedValues.gender === option.value
-                                    ? "border-sage bg-sage/20 text-sage-light"
+                                    ? "border-sage bg-sage/20 text-sage-dark dark:text-sage-light"
                                     : "border-divider text-text-muted hover:border-sage/50"
                                 }`}
                               >
@@ -360,243 +595,6 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                               {errors.gender.message}
                             </p>
                           )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Step 2: Schedule */}
-                  {step === 2 && !isSubmitted && (
-                    <motion.div
-                      key="step2"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      className="space-y-6"
-                    >
-                      <div>
-                        <h3 className="text-xl font-bold text-text mb-2">
-                          상담 방식 및 일정
-                        </h3>
-                        <p className="text-text-muted text-sm">
-                          상담은 매주 같은 요일/시간에 진행됩니다.
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        {/* 상담 방식 선택 */}
-                        <div>
-                          <label className="block text-sm font-medium text-text-muted mb-2">
-                            상담 방식
-                          </label>
-                          <div className="grid grid-cols-3 gap-2">
-                            {[
-                              { value: "face-to-face", label: "대면" },
-                              { value: "online", label: "비대면" },
-                              { value: "any", label: "상관없음" },
-                            ].map((option) => (
-                              <label
-                                key={option.value}
-                                className={`py-3 px-4 rounded-xl border-2 text-center cursor-pointer transition-all ${
-                                  watchedValues.consultationType === option.value
-                                    ? "border-sage bg-sage/20 text-sage-light"
-                                    : "border-divider text-text-muted hover:border-sage/50"
-                                }`}
-                              >
-                                <input
-                                  type="radio"
-                                  value={option.value}
-                                  {...register("consultationType")}
-                                  className="sr-only"
-                                />
-                                {option.label}
-                              </label>
-                            ))}
-                          </div>
-                          {errors.consultationType && (
-                            <p className="text-red-400 text-sm mt-1">
-                              {errors.consultationType.message}
-                            </p>
-                          )}
-                        </div>
-
-                        {/* 선호 지역 (대면 선택 시) */}
-                        {(watchedValues.consultationType === "face-to-face" || watchedValues.consultationType === "any") && (
-                          <div>
-                            <label className="block text-sm font-medium text-text-muted mb-1">
-                              선호하는 지역 (선택)
-                            </label>
-                            <input
-                              {...register("preferredRegion")}
-                              className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
-                              placeholder="예: 홍대, 강남 등"
-                            />
-                          </div>
-                        )}
-
-                        <div>
-                          <label className="block text-sm font-medium text-text-muted mb-2">
-                            가능한 요일 (복수 선택)
-                          </label>
-                          <div className="flex flex-wrap gap-2">
-                            {DAY_OPTIONS.map((day) => (
-                              <button
-                                key={day.value}
-                                type="button"
-                                onClick={() => toggleArrayValue("availableDays", day.value)}
-                                className={`px-4 py-2 rounded-full border-2 text-sm font-medium transition-all ${
-                                  watchedValues.availableDays?.includes(day.value)
-                                    ? "border-sage bg-sage text-white"
-                                    : "border-divider text-text-muted hover:border-sage/50"
-                                }`}
-                              >
-                                {day.label}
-                              </button>
-                            ))}
-                          </div>
-                          {errors.availableDays && (
-                            <p className="text-red-400 text-sm mt-1">
-                              {errors.availableDays.message}
-                            </p>
-                          )}
-                        </div>
-
-                        <div>
-                          <label className="block text-sm font-medium text-text-muted mb-2">
-                            가능한 시간대 (복수 선택)
-                          </label>
-                          <div className="space-y-2">
-                            {TIME_OPTIONS.map((time) => (
-                              <button
-                                key={time.value}
-                                type="button"
-                                onClick={() => toggleArrayValue("availableTimes", time.value)}
-                                className={`w-full py-3 px-4 rounded-xl border-2 text-left transition-all ${
-                                  watchedValues.availableTimes?.includes(time.value)
-                                    ? "border-sage bg-sage/20 text-sage-light"
-                                    : "border-divider text-text-muted hover:border-sage/50"
-                                }`}
-                              >
-                                {time.label}
-                              </button>
-                            ))}
-                          </div>
-                          {errors.availableTimes && (
-                            <p className="text-red-400 text-sm mt-1">
-                              {errors.availableTimes.message}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-
-                  {/* Step 3: Concerns & Screening */}
-                  {step === 3 && !isSubmitted && (
-                    <motion.div
-                      key="step3"
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      className="space-y-6"
-                    >
-                      <div>
-                        <h3 className="text-xl font-bold text-text mb-2">
-                          상담 주제
-                        </h3>
-                        <p className="text-text-muted text-sm">
-                          어떤 고민으로 상담을 원하시나요?
-                        </p>
-                      </div>
-
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-text-muted mb-2">
-                            해당하는 고민을 선택해주세요 (복수 선택)
-                          </label>
-                          <div className="space-y-2">
-                            {CONCERN_OPTIONS.map((concern) => (
-                              <button
-                                key={concern.value}
-                                type="button"
-                                onClick={() => toggleArrayValue("concerns", concern.value)}
-                                className={`w-full py-3 px-4 rounded-xl border-2 text-left transition-all flex items-center gap-3 ${
-                                  watchedValues.concerns?.includes(concern.value)
-                                    ? "border-sage bg-sage/20"
-                                    : "border-divider hover:border-sage/50"
-                                }`}
-                              >
-                                <div
-                                  className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
-                                    watchedValues.concerns?.includes(concern.value)
-                                      ? "border-sage bg-sage"
-                                      : "border-text-subtle"
-                                  }`}
-                                >
-                                  {watchedValues.concerns?.includes(concern.value) && (
-                                    <Check className="w-3 h-3 text-white" />
-                                  )}
-                                </div>
-                                <span
-                                  className={
-                                    watchedValues.concerns?.includes(concern.value)
-                                      ? "text-sage-light"
-                                      : "text-text-muted"
-                                  }
-                                >
-                                  {concern.label}
-                                </span>
-                              </button>
-                            ))}
-                          </div>
-                          {errors.concerns && (
-                            <p className="text-red-400 text-sm mt-1">
-                              {errors.concerns.message}
-                            </p>
-                          )}
-                        </div>
-
-                        {/* Additional Description */}
-                        <div>
-                          <label className="block text-sm font-medium text-text-muted mb-2">
-                            부가 설명 (선택)
-                          </label>
-                          <textarea
-                            {...register("additionalDescription")}
-                            className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all resize-none h-24"
-                            placeholder="상담사에게 미리 전달하고 싶은 내용이 있다면 적어주세요."
-                          />
-                        </div>
-
-                        {/* Screening Questions */}
-                        <div className="pt-4 border-t border-divider">
-                          <p className="text-sm font-medium text-text-muted mb-4">
-                            사전 확인 질문
-                          </p>
-
-                          <div className="space-y-3">
-                            <label className="flex items-center gap-3 p-3 rounded-xl bg-background-card cursor-pointer">
-                              <input
-                                type="checkbox"
-                                {...register("hasSuicidalRisk")}
-                                className="w-4 h-4 rounded border-white/20 bg-background text-sage focus:ring-sage"
-                              />
-                              <span className="text-sm text-text-muted">
-                                자살 위기나 심각한 자해 위험이 있습니다.
-                              </span>
-                            </label>
-
-                            <label className="flex items-center gap-3 p-3 rounded-xl bg-background-card cursor-pointer">
-                              <input
-                                type="checkbox"
-                                {...register("hasPsychiatricTreatment")}
-                                className="w-4 h-4 rounded border-white/20 bg-background text-sage focus:ring-sage"
-                              />
-                              <span className="text-sm text-text-muted">
-                                현재 정신과 진료 또는 약물 복용 중입니다.
-                              </span>
-                            </label>
-                          </div>
                         </div>
                       </div>
                     </motion.div>
