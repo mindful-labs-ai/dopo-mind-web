@@ -55,10 +55,9 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
+    formState: { errors, submitCount },
     trigger,
     reset,
-    clearErrors,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -88,13 +87,6 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       document.body.style.overflow = "";
     };
   }, [isOpen]);
-
-  // step 3 진입 시 해당 필드의 에러 초기화 (trigger가 전체 스키마를 검증하면서 남긴 에러 제거)
-  useEffect(() => {
-    if (step === 3) {
-      clearErrors(["name", "phone", "birthYear", "gender"]);
-    }
-  }, [step, clearErrors]);
 
   const handleNext = async () => {
     let fieldsToValidate: (keyof FormData)[] = [];
@@ -534,7 +526,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                             className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="홍길동"
                           />
-                          {errors.name && (
+                          {submitCount > 0 && errors.name && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.name.message}
                             </p>
@@ -550,7 +542,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                             className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="010-1234-5678"
                           />
-                          {errors.phone && (
+                          {submitCount > 0 && errors.phone && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.phone.message}
                             </p>
@@ -567,7 +559,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                             className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="1995"
                           />
-                          {errors.birthYear && (
+                          {submitCount > 0 && errors.birthYear && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.birthYear.message}
                             </p>
@@ -598,7 +590,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                               </label>
                             ))}
                           </div>
-                          {errors.gender && (
+                          {submitCount > 0 && errors.gender && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.gender.message}
                             </p>
