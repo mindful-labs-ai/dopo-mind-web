@@ -507,6 +507,14 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                       exit={{ opacity: 0, x: -20 }}
                       className="space-y-6"
                     >
+                      {/* DEBUG: 제거 예정 */}
+                      <div className="bg-yellow-100 text-black p-3 rounded text-xs">
+                        <p>submitCount: {submitCount}</p>
+                        <p>errors.name: {errors.name?.message ?? "없음"}</p>
+                        <p>errors.phone: {errors.phone?.message ?? "없음"}</p>
+                        <p>errors.birthYear: {errors.birthYear?.message ?? "없음"}</p>
+                        <p>errors.gender: {errors.gender?.message ?? "없음"}</p>
+                      </div>
                       <div>
                         <h3 className="text-xl font-bold text-text mb-2">
                           기본 정보
