@@ -28,10 +28,8 @@ const formSchema = z.object({
   additionalDescription: z.string().optional(),
   hasSuicidalRisk: z.boolean(),
   hasPsychiatricTreatment: z.boolean(),
-  // Step 4: 동의 - 주석 처리됨
-  // agreePrivacy: z.literal(true, { errorMap: () => ({ message: "개인정보 수집 이용에 동의해주세요" }) }),
-  // agreeRecording: z.boolean(),
-  // agreeCancelPolicy: z.literal(true, { errorMap: () => ({ message: "취소/환불 규정을 확인해주세요" }) }),
+  // 개인정보 동의
+  agreePrivacy: z.literal(true, { errorMap: () => ({ message: "개인정보 수집 및 제3자 제공에 동의해주세요" }) }),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -67,10 +65,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       concerns: [],
       hasSuicidalRisk: false,
       hasPsychiatricTreatment: false,
-      // Step 4 주석 처리됨
-      // agreePrivacy: false as unknown as true,
-      // agreeRecording: false,
-      // agreeCancelPolicy: false as unknown as true,
+      agreePrivacy: false as unknown as true,
     },
   });
 
@@ -118,7 +113,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
   const handleStep3Submit = async () => {
     setStep3Attempted(true);
-    const isValid = await trigger(["name", "phone", "birthYear", "gender"]);
+    const isValid = await trigger(["name", "phone", "birthYear", "gender", "agreePrivacy"]);
     if (!isValid) return;
 
     setIsSubmitting(true);
@@ -600,6 +595,25 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           {step3Attempted && errors.gender && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.gender.message}
+                            </p>
+                          )}
+                        </div>
+
+                        {/* 개인정보 동의 */}
+                        <div className="pt-4 border-t border-divider">
+                          <label className="flex items-start gap-3 p-4 rounded-xl bg-background-card cursor-pointer border border-divider-light">
+                            <input
+                              type="checkbox"
+                              {...register("agreePrivacy")}
+                              className="mt-0.5 w-4 h-4 rounded border-white/20 bg-background text-sage focus:ring-sage"
+                            />
+                            <span className="text-sm text-text-muted leading-relaxed">
+                              심리상담 진행을 위한 개인정보 수집 및 활용, 제3자 제공(상담사)에 동의합니다.
+                            </span>
+                          </label>
+                          {step3Attempted && errors.agreePrivacy && (
+                            <p className="text-red-400 text-sm mt-1">
+                              {errors.agreePrivacy.message}
                             </p>
                           )}
                         </div>
