@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
+
+const GA_TRACKING_ID = "G-BZH5HF09PP";
 
 export const metadata: Metadata = {
   title: "심리상담연구소 앤아더라이프 - 상담, 부담스럽게 느껴졌다면",
@@ -53,6 +56,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" suppressHydrationWarning>
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}');
+          `}
+        </Script>
+      </head>
       <body className="antialiased">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
