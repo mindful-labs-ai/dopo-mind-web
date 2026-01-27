@@ -49,13 +49,14 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   const [showCrisisAlert, setShowCrisisAlert] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [step3Attempted, setStep3Attempted] = useState(false);
 
   const {
     register,
-    handleSubmit,
     watch,
     setValue,
-    formState: { errors, submitCount },
+    getValues,
+    formState: { errors },
     trigger,
     reset,
   } = useForm<FormData>({
@@ -115,11 +116,16 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     }
   };
 
-  const onSubmit = async (data: FormData) => {
+  const handleStep3Submit = async () => {
+    setStep3Attempted(true);
+    const isValid = await trigger(["name", "phone", "birthYear", "gender"]);
+    if (!isValid) return;
+
     setIsSubmitting(true);
     setSubmitError(null);
 
     try {
+      const data = getValues();
       const response = await fetch("/api/consultation", {
         method: "POST",
         headers: {
@@ -148,6 +154,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     setIsSubmitted(false);
     setShowCrisisAlert(false);
     setSubmitError(null);
+    setStep3Attempted(false);
     reset();
     onClose();
   };
@@ -258,7 +265,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
             </div>
 
             {/* Content */}
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col flex-1 overflow-hidden">
+            <form onSubmit={(e) => e.preventDefault()} className="flex flex-col flex-1 overflow-hidden">
               <div className="flex-1 overflow-y-auto p-6">
                 <AnimatePresence mode="wait">
                   {/* Step 1: Concerns & Screening */}
@@ -507,14 +514,6 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                       exit={{ opacity: 0, x: -20 }}
                       className="space-y-6"
                     >
-                      {/* DEBUG: 제거 예정 */}
-                      <div className="bg-yellow-100 text-black p-3 rounded text-xs">
-                        <p>submitCount: {submitCount}</p>
-                        <p>errors.name: {errors.name?.message ?? "없음"}</p>
-                        <p>errors.phone: {errors.phone?.message ?? "없음"}</p>
-                        <p>errors.birthYear: {errors.birthYear?.message ?? "없음"}</p>
-                        <p>errors.gender: {errors.gender?.message ?? "없음"}</p>
-                      </div>
                       <div>
                         <h3 className="text-xl font-bold text-text mb-2">
                           기본 정보
@@ -534,7 +533,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                             className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="홍길동"
                           />
-                          {submitCount > 0 && errors.name && (
+                          {step3Attempted && errors.name && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.name.message}
                             </p>
@@ -550,7 +549,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                             className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="010-1234-5678"
                           />
-                          {submitCount > 0 && errors.phone && (
+                          {step3Attempted && errors.phone && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.phone.message}
                             </p>
@@ -567,7 +566,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                             className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="1995"
                           />
-                          {submitCount > 0 && errors.birthYear && (
+                          {step3Attempted && errors.birthYear && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.birthYear.message}
                             </p>
@@ -598,7 +597,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                               </label>
                             ))}
                           </div>
-                          {submitCount > 0 && errors.gender && (
+                          {step3Attempted && errors.gender && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.gender.message}
                             </p>
@@ -759,7 +758,8 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                       </button>
                     ) : (
                       <button
-                        type="submit"
+                        type="button"
+                        onClick={handleStep3Submit}
                         disabled={isSubmitting}
                         className="flex-1 py-3 rounded-xl bg-sage hover:bg-sage-dark text-white font-semibold transition-colors glow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                       >
