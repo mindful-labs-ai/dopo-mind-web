@@ -13,11 +13,11 @@ const formSchema = z.object({
   name: z.string({ required_error: "이름을 입력해주세요" }).min(2, "이름은 2글자 이상 입력해주세요"),
   phone: z.string({ required_error: "연락처를 입력해주세요" }).regex(/^01[0-9]-?[0-9]{4}-?[0-9]{4}$/, "올바른 연락처를 입력해주세요"),
   birthYear: z.string({ required_error: "출생연도를 입력해주세요" }).min(4, "출생연도 4자리를 입력해주세요"),
-  gender: z.enum(["male", "female", "other"], {
+  gender: z.enum(["남성", "여성", "기타"], {
     required_error: "성별을 선택해주세요",
   }),
   // Step 2: 상담 방식 및 희망 일정
-  consultationType: z.enum(["face-to-face", "online", "any"], {
+  consultationType: z.enum(["대면", "비대면", "상관없음"], {
     errorMap: () => ({ message: "상담 방식을 선택해주세요" }),
   }),
   preferredRegion: z.string().optional(),
@@ -398,9 +398,9 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           </label>
                           <div className="grid grid-cols-3 gap-2">
                             {[
-                              { value: "face-to-face", label: "대면" },
-                              { value: "online", label: "비대면" },
-                              { value: "any", label: "상관없음" },
+                              { value: "대면", label: "대면" },
+                              { value: "비대면", label: "비대면" },
+                              { value: "상관없음", label: "상관없음" },
                             ].map((option) => (
                               <label
                                 key={option.value}
@@ -428,7 +428,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                         </div>
 
                         {/* 선호 지역 (대면 선택 시) */}
-                        {(watchedValues.consultationType === "face-to-face" || watchedValues.consultationType === "any") && (
+                        {(watchedValues.consultationType === "대면" || watchedValues.consultationType === "상관없음") && (
                           <div>
                             <label className="block text-sm font-medium text-text-muted mb-1">
                               선호하는 지역 (선택)

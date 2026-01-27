@@ -3,10 +3,10 @@ export interface ConsultationFormData {
   name: string;
   phone: string;
   birthYear: string;
-  gender: "male" | "female" | "other";
+  gender: "남성" | "여성" | "기타";
 
   // Step 2: 상담 방식 및 희망 일정
-  consultationType: "face-to-face" | "online" | "any";
+  consultationType: "대면" | "비대면" | "상관없음";
   preferredRegion?: string;
   availableDays: string[];
   availableTimes: string[];

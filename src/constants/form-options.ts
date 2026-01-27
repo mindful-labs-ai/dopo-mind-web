@@ -1,29 +1,29 @@
 export const CONCERN_OPTIONS = [
-  { value: "career", label: "진로/직장 (취업, 이직, 직장 내 스트레스)" },
-  { value: "relationship", label: "대인관계 (가족, 연인, 친구와의 갈등)" },
-  { value: "depression", label: "우울/불안 (우울감, 불안, 무기력)" },
-  { value: "self-understanding", label: "자기이해 (자존감, 정체성)" },
-  { value: "other", label: "기타 (일상에서 설명하기 어려운 심리적 불편감)" },
+  { value: "진로/직장 (취업, 이직, 직장 내 스트레스)", label: "진로/직장 (취업, 이직, 직장 내 스트레스)" },
+  { value: "대인관계 (가족, 연인, 친구와의 갈등)", label: "대인관계 (가족, 연인, 친구와의 갈등)" },
+  { value: "우울/불안 (우울감, 불안, 무기력)", label: "우울/불안 (우울감, 불안, 무기력)" },
+  { value: "자기이해 (자존감, 정체성)", label: "자기이해 (자존감, 정체성)" },
+  { value: "기타 (일상에서 설명하기 어려운 심리적 불편감)", label: "기타 (일상에서 설명하기 어려운 심리적 불편감)" },
 ];
 
 export const DAY_OPTIONS = [
-  { value: "mon", label: "월" },
-  { value: "tue", label: "화" },
-  { value: "wed", label: "수" },
-  { value: "thu", label: "목" },
-  { value: "fri", label: "금" },
-  { value: "sat", label: "토" },
+  { value: "월", label: "월" },
+  { value: "화", label: "화" },
+  { value: "수", label: "수" },
+  { value: "목", label: "목" },
+  { value: "금", label: "금" },
+  { value: "토", label: "토" },
 ];
 
 export const TIME_OPTIONS = [
-  { value: "morning", label: "오전 (10시~12시)" },
-  { value: "afternoon-early", label: "오후 초반 (12시~15시)" },
-  { value: "afternoon-late", label: "오후 후반 (15시~17시)" },
-  { value: "evening", label: "저녁 (17시~21시)" },
+  { value: "오전 (10시~12시)", label: "오전 (10시~12시)" },
+  { value: "오후 초반 (12시~15시)", label: "오후 초반 (12시~15시)" },
+  { value: "오후 후반 (15시~17시)", label: "오후 후반 (15시~17시)" },
+  { value: "저녁 (17시~21시)", label: "저녁 (17시~21시)" },
 ];
 
 export const GENDER_OPTIONS = [
-  { value: "male", label: "남성" },
-  { value: "female", label: "여성" },
-  { value: "other", label: "기타" },
+  { value: "남성", label: "남성" },
+  { value: "여성", label: "여성" },
+  { value: "기타", label: "기타" },
 ];
