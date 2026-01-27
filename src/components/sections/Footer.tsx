@@ -91,14 +91,14 @@ export default function Footer({ onOpenModal }: FooterProps) {
 
         {/* Bottom links */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-text-subtle">
-          <div className="flex gap-6">
+          {/* <div className="flex gap-6">
             <a href="#" className="hover:text-sage transition-colors">
               이용약관
             </a>
             <a href="#" className="hover:text-sage transition-colors">
               개인정보처리방침
             </a>
-          </div>
+          </div> */}
           <p className="text-text-subtle">
             Copyright © Mindful Labs Inc. | All Rights Reserved
           </p>
