@@ -58,6 +58,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     formState: { errors },
     trigger,
     reset,
+    clearErrors,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,6 +88,13 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       document.body.style.overflow = "";
     };
   }, [isOpen]);
+
+  // step 3 진입 시 해당 필드의 에러 초기화 (trigger가 전체 스키마를 검증하면서 남긴 에러 제거)
+  useEffect(() => {
+    if (step === 3) {
+      clearErrors(["name", "phone", "birthYear", "gender"]);
+    }
+  }, [step, clearErrors]);
 
   const handleNext = async () => {
     let fieldsToValidate: (keyof FormData)[] = [];
