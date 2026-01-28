@@ -150,7 +150,7 @@ export default function WhyProfessionalSection() {
                 <div className="p-4 text-center border-l border-divider-light bg-sage/5">
                   <span
                     className={`text-sm font-medium ${
-                      row.highlight ? "text-sage-light text-base" : "text-sage"
+                      row.highlight ? "text-sage-dark text-base" : "text-sage"
                     }`}
                   >
                     {row.ours}
