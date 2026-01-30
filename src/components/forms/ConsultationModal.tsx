@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { X, ChevronRight, ChevronLeft, Check, AlertTriangle, Phone } from "lucide-react";
+import { X, ChevronRight, ChevronLeft, Check, AlertTriangle, Phone, MapPin } from "lucide-react";
 import { CONCERN_OPTIONS, DAY_OPTIONS, TIME_OPTIONS, GENDER_OPTIONS } from "@/constants/form-options";
 
 const formSchema = z.object({
@@ -429,17 +429,21 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                           )}
                         </div>
 
-                        {/* 선호 지역 (대면 선택 시) */}
+                        {/* 대면 상담 안내 */}
                         {(watchedValues.consultationType === "대면" || watchedValues.consultationType === "상관없음") && (
-                          <div>
-                            <label className="block text-sm font-medium text-text-muted mb-1">
-                              선호하는 지역 (선택)
-                            </label>
-                            <input
-                              {...register("preferredRegion")}
-                              className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
-                              placeholder="예: 홍대, 강남 등"
-                            />
+                          <div className="p-4 rounded-xl bg-sage/10 border border-sage/20">
+                            <p className="text-sm text-text-muted mb-3">
+                              대면 상담은 합정역 5분 거리의 상담 센터에서 진행됩니다.
+                            </p>
+                            <a
+                              href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%9E%94%EB%8B%A4%EB%A6%AC%EB%A1%9C%2073"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#03C75A] text-white text-sm font-medium hover:bg-[#02b351] transition-colors"
+                            >
+                              <MapPin className="w-4 h-4" />
+                              지도 보기
+                            </a>
                           </div>
                         )}
 
