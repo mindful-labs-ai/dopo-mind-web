@@ -439,7 +439,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                               href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%EC%8B%9C%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%9E%94%EB%8B%A4%EB%A6%AC%EB%A1%9C%2073"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#03C75A] text-white text-sm font-medium hover:bg-[#02b351] transition-colors"
+                              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-sage/20 text-sage-dark dark:text-sage-light text-sm font-medium hover:bg-sage/30 transition-colors"
                             >
                               <MapPin className="w-4 h-4" />
                               지도 보기
