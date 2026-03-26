@@ -29,6 +29,9 @@ export default function PricingSection({ onOpenModal }: PricingSectionProps) {
           <p className="text-text-muted">
             숨겨진 비용 없이, 명확하게 안내드립니다.
           </p>
+          <p className="text-sm text-sage mt-2">
+            1987~2007년생 대상 · 2030세대를 위한 회기당 2만원 특별 혜택
+          </p>
         </motion.div>
 
         {/* Pricing Cards */}

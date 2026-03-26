@@ -12,7 +12,17 @@ const formSchema = z.object({
   // Step 1: 기본 정보
   name: z.string({ required_error: "이름을 입력해주세요" }).min(2, "이름은 2글자 이상 입력해주세요"),
   phone: z.string({ required_error: "연락처를 입력해주세요" }).regex(/^01[0-9]-?[0-9]{4}-?[0-9]{4}$/, "올바른 연락처를 입력해주세요"),
-  birthYear: z.string({ required_error: "출생연도를 입력해주세요" }).min(4, "출생연도 4자리를 입력해주세요"),
+  birthYear: z.string({ required_error: "출생연도를 입력해주세요" })
+    .min(4, "출생연도 4자리를 입력해주세요")
+    .refine(
+      (val) => {
+        const year = parseInt(val, 10);
+        return !isNaN(year) && year >= 1987 && year <= 2007;
+      },
+      {
+        message: "도포의 마음상담은 1987~2007년생(2030세대)을 위한 특별 혜택이에요. 출생연도를 다시 확인해 주세요.",
+      }
+    ),
   gender: z.enum(["남성", "여성", "기타"], {
     required_error: "성별을 선택해주세요",
   }),
@@ -565,6 +575,9 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                             className="w-full px-4 py-3 rounded-xl border border-divider bg-background-card text-text placeholder-text-subtle focus:border-sage focus:ring-2 focus:ring-sage/20 outline-none transition-all"
                             placeholder="1995"
                           />
+                          <p className="text-xs text-text-subtle mt-1">
+                            신청 가능 연령 : 1987년생 ~ 2007년생
+                          </p>
                           {step3Attempted && errors.birthYear && (
                             <p className="text-red-400 text-sm mt-1">
                               {errors.birthYear.message}

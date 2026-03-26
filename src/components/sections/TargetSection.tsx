@@ -44,6 +44,9 @@ export default function TargetSection() {
           <p className="text-text-muted">
             망설이고 계셨다면, 지금이 시작할 때입니다.
           </p>
+          <span className="inline-block mt-3 px-4 py-1.5 bg-sage/10 text-sage text-sm rounded-full border border-sage/20">
+            1987~2007년생 대상 (2030세대 전용 혜택)
+          </span>
         </motion.div>
 
         {/* Target Cards - 2x2 Grid */}
