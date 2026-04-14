@@ -15,6 +15,38 @@ interface ConsultationData {
   hasPsychiatricTreatment: boolean;
 }
 
+function sendSlackNotification(data: ConsultationData) {
+  const webhookUrl = process.env.SLACK_WEBHOOK_URL;
+  if (!webhookUrl) return;
+
+  const text = [
+    "[새로운 상담 문의가 도착했습니다! :bell:]",
+    "",
+    `- 이름: ${data.name}`,
+    `- 연락처: ${data.phone}`,
+    `- 성별: ${data.gender}`,
+    `- 생년월일: ${data.birthYear}`,
+    "",
+    `- 상담 방식: ${data.consultationType}`,
+    `- 지역: ${data.preferredRegion || ""}`,
+    `- 시간: ${data.availableTimes.join(", ")}`,
+    `- 요일: ${data.availableDays.join(", ")}`,
+    "",
+    `- 고민 내용: ${data.concerns.join(", ")}`,
+    `- 세부 내용: ${data.additionalDescription || ""}`,
+  ].join("\n");
+
+  const message = { text };
+
+  fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(message),
+  }).catch((error) => {
+    console.error("Slack notification failed:", error);
+  });
+}
+
 export async function POST(request: NextRequest) {
   try {
     const data: ConsultationData = await request.json();
@@ -68,6 +100,9 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await response.json();
+
+    // Slack 알림 (fire-and-forget: 실패해도 사용자 응답에 영향 없음)
+    sendSlackNotification(data);
 
     return NextResponse.json(
       { success: true, id: result.id },
